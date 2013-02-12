@@ -4,13 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{D74700FF-8BF6-4901-86EE-0E58B764D647}</ProjectGuid>
+    <ProjectGuid>{373DD136-1E71-483C-97CC-DD1EE84296CC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MileageStats.Data.SqlServer</RootNamespace>
     <AssemblyName>MileageStats.Data.SqlServer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,9 +34,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,8 +52,57 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Initializers\RelyOnBackupRestoreSqlServerInitializer.cs" />
     <Compile Include="Initializers\SqlServerInitializer.cs" />
+    <Compile Include="MileageStatsDbContext.cs" />
+    <Compile Include="MileageStatsDbContextSeedData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Repositories\BaseRepository.cs" />
+    <Compile Include="Repositories\CountryRepository.cs" />
+    <Compile Include="Repositories\FillupRepository.cs" />
+    <Compile Include="Repositories\ReminderRepository.cs" />
+    <Compile Include="Repositories\UserRepository.cs" />
+    <Compile Include="Repositories\VehicleManufacturerRepository.cs" />
+    <Compile Include="Repositories\VehiclePhotoRepository.cs" />
+    <Compile Include="Repositories\VehicleRepository.cs" />
+    <Compile Include="RepositoryInitializer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MileageStats.Data\MileageStats.Data.csproj">
+      <Project>{f470d6da-a998-4047-b7da-4246e280a5ff}</Project>
+      <Name>MileageStats.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MileageStats.Model\MileageStats.Model.csproj">
+      <Project>{d1fe872b-a1b2-4864-a753-81493f72a19c}</Project>
+      <Name>MileageStats.Model</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\bmw.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\jeep.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\miata.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\soccermomcar.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -14,10 +14,37 @@
 // organization, product, domain name, email address, logo, person,
 // places, or events is intended or should be inferred.
 //===================================================================================
-namespace MileageStats.Data.SqlCe
+using System.Collections.Generic;
+using System.Linq;
+using MileageStats.Model;
+
+namespace MileageStats.Data.SqlServer.Repositories
 {
-    public interface ISeedDatabase
+    public class FillupRepository : BaseRepository, IFillupRepository
     {
-        void Seed();
+        public FillupRepository(IUnitOfWork unitOfWork) : base(unitOfWork)
+        {
+        }
+
+        public void Create(int userId, int vehicleId, FillupEntry fillup)
+        {
+            fillup.VehicleId = vehicleId;
+            this.GetDbSet<FillupEntry>().Add(fillup);
+            this.UnitOfWork.SaveChanges();
+        }
+
+        public FillupEntry GetFillup(int fillupId)
+        {
+            return this.GetDbSet<FillupEntry>()
+                .Where(v => v.FillupEntryId == fillupId)
+                .Single();
+        }
+
+        public IEnumerable<FillupEntry> GetFillups(int vehicleId)
+        {
+            return this.GetDbSet<FillupEntry>()
+                .Where(v => v.VehicleId == vehicleId)
+                .ToList();
+        }
     }
 }

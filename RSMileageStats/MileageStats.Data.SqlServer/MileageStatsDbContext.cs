@@ -19,7 +19,7 @@ using System.Data.Entity;
 using System.ComponentModel.DataAnnotations.Schema;
 using MileageStats.Model;
 
-namespace MileageStats.Data.SqlCe
+namespace MileageStats.Data.SqlServer
 {
     /// <summary>
     /// The context for the MileageStats database.
