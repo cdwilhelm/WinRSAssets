@@ -66,6 +66,8 @@ local.properties
 # TFS Folder
 
 $tf
+*.tf1
+*.tfb
 
 ## TODO: If you have NuGet Package Restore enabled, uncomment this
 #packages/
@@ -165,3 +167,5 @@ pip-log.txt
 
 # Mac crap
 .DS_Store
+
+# Custom Project Exclusions
