@@ -329,7 +329,6 @@
     <Content Include="Scripts\Debug\mstats.events.js" />
     <Content Include="Scripts\Debug\mstats.vehicle-list.js" />
     <Content Include="Scripts\Debug\mstats.charts.js" />
-    <Content Include="Scripts\tests\jquery.simulate.js" />
     <Content Include="Scripts\tests\mstats.charts.tests.js" />
     <Content Include="Scripts\tests\mstats.pinnedsite.tests.js" />
     <Content Include="Scripts\tests\mstats.pubsub.tests.js" />
@@ -343,8 +342,6 @@
     <Content Include="Scripts\tests\mstats.utils.tests.js" />
     <Content Include="Scripts\tests\mstats.data.tests.js" />
     <Content Include="Scripts\tests\mstats.vehicle-list.tests.js" />
-    <Content Include="Scripts\tests\qunit.css" />
-    <Content Include="Scripts\tests\qunit.js" />
     <Content Include="Scripts\tests\test-utilities.js" />
     <Content Include="Scripts\tests\tests.htm" />
     <Content Include="Web.config">

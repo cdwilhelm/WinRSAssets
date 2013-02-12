@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.microsoft.com/developer/msbuild/2003	..\Schemas\Microsoft.Build.xsd">
+
+  <!-- Configurations for build process itself -->
+  <PropertyGroup>
+    <TasksRootFolder Condition="'$(TasksRootFolder)'">$(InstallRootPath)\BuildScripts\Tasks</TasksRootFolder>
+  </PropertyGroup>
+  
+  <!-- Configuration for compilation processes -->
+  <PropertyGroup>
+    <CodeAnalysisTreatWarningsAsErrors Condition="'$(CodeAnalysisTreatWarningsAserrors)'==''">False</CodeAnalysisTreatWarningsAsErrors>
+    <TreatWarningsAsErrors Condition="'$(TreatWarningsAsErrors)'==''">False</TreatWarningsAsErrors>
+    <RunCodeAnalysis Condition="'$(RunCodeAnalysis)'==''">False</RunCodeAnalysis>
+    <RunTests Condition="'$(RunTests)'==''">False</RunTests>
+  </PropertyGroup>
+  
+</Project>

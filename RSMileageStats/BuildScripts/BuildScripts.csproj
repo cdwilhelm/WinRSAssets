@@ -39,13 +39,19 @@
   <ItemGroup>
     <Content Include="Build.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Environment\example_dev.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Targets\Windows.Azure.Storage.xml">
+    <Content Include="Solution\Properties.xml" />
+    <Content Include="Targets\Build.Compile.xml" />
+    <Content Include="Targets\Build.Package.xml" />
+    <Content Include="Targets\Build.ReleaseLog.xml" />
+    <None Include="Targets\Build.targets" />
+    <None Include="Targets\Windows.Azure.Storage.targets">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Tasks\" />

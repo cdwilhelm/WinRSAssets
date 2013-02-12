@@ -40,11 +40,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_BuildTasks", "_BuildTasks"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_BuildScripts", "_BuildScripts", "{9AD6314B-A9B4-49CE-A547-84B1490D0911}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AzureBuildTasks.cs", "AzureBuildTasks.cs\AzureBuildTasks.cs.csproj", "{D977F9C0-ABFB-4FFA-BE4F-839606F72136}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildScripts", "BuildScripts\BuildScripts.csproj", "{36A9F164-D0C5-4F26-B14C-1D526FAEE234}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MileageStats.Data.SqlServer", "MileageStats.Data.SqlServer\MileageStats.Data.SqlServer.csproj", "{373DD136-1E71-483C-97CC-DD1EE84296CC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildTasks.AzureStorage", "BuildTasks.AzureStorage\BuildTasks.AzureStorage.csproj", "{22F8F53E-2CCC-4AAC-97B8-0FA0D96179A1}"
 EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
@@ -52,14 +52,14 @@ Global
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://192.168.1.253:8080/tfs/defaultcollection
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = AzureBuildTasks.cs\\AzureBuildTasks.cs.csproj
+		SccProjectUniqueName1 = BuildScripts\\BuildScripts.csproj
 		SccProjectTopLevelParentUniqueName1 = MileageStats.sln
-		SccProjectName1 = AzureBuildTasks.cs
-		SccLocalPath1 = AzureBuildTasks.cs
-		SccProjectUniqueName2 = BuildScripts\\BuildScripts.csproj
+		SccProjectName1 = BuildScripts
+		SccLocalPath1 = BuildScripts
+		SccProjectUniqueName2 = BuildTasks.AzureStorage\\BuildTasks.AzureStorage.csproj
 		SccProjectTopLevelParentUniqueName2 = MileageStats.sln
-		SccProjectName2 = BuildScripts
-		SccLocalPath2 = BuildScripts
+		SccProjectName2 = BuildTasks.AzureStorage
+		SccLocalPath2 = BuildTasks.AzureStorage
 		SccProjectUniqueName3 = MileageStats.Data.SqlCe.Tests\\MileageStats.Data.SqlCe.Tests.csproj
 		SccProjectTopLevelParentUniqueName3 = MileageStats.sln
 		SccProjectName3 = MileageStats.Data.SqlCe.Tests
@@ -144,10 +144,6 @@ Global
 		{A295CB97-24EB-4DE9-A596-C2231F51A448}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A295CB97-24EB-4DE9-A596-C2231F51A448}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A295CB97-24EB-4DE9-A596-C2231F51A448}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D977F9C0-ABFB-4FFA-BE4F-839606F72136}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D977F9C0-ABFB-4FFA-BE4F-839606F72136}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D977F9C0-ABFB-4FFA-BE4F-839606F72136}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D977F9C0-ABFB-4FFA-BE4F-839606F72136}.Release|Any CPU.Build.0 = Release|Any CPU
 		{36A9F164-D0C5-4F26-B14C-1D526FAEE234}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{36A9F164-D0C5-4F26-B14C-1D526FAEE234}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36A9F164-D0C5-4F26-B14C-1D526FAEE234}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -156,6 +152,10 @@ Global
 		{373DD136-1E71-483C-97CC-DD1EE84296CC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{373DD136-1E71-483C-97CC-DD1EE84296CC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{373DD136-1E71-483C-97CC-DD1EE84296CC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{22F8F53E-2CCC-4AAC-97B8-0FA0D96179A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22F8F53E-2CCC-4AAC-97B8-0FA0D96179A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22F8F53E-2CCC-4AAC-97B8-0FA0D96179A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22F8F53E-2CCC-4AAC-97B8-0FA0D96179A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -170,7 +170,7 @@ Global
 		{A295CB97-24EB-4DE9-A596-C2231F51A448} = {80DB0069-8CDA-45EA-8535-52DD164DB24F}
 		{373DD136-1E71-483C-97CC-DD1EE84296CC} = {80DB0069-8CDA-45EA-8535-52DD164DB24F}
 		{A90A6E16-E9F0-49DC-88B2-82882DF86DC3} = {F1AB27BD-3126-423E-B6F1-322738593053}
-		{D977F9C0-ABFB-4FFA-BE4F-839606F72136} = {D1C8FC01-8ED3-4C89-BA6C-CF862E317D8A}
+		{22F8F53E-2CCC-4AAC-97B8-0FA0D96179A1} = {D1C8FC01-8ED3-4C89-BA6C-CF862E317D8A}
 		{36A9F164-D0C5-4F26-B14C-1D526FAEE234} = {9AD6314B-A9B4-49CE-A547-84B1490D0911}
 	EndGlobalSection
 EndGlobal
