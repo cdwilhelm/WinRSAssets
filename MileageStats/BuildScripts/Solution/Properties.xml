@@ -15,6 +15,7 @@
     <RunTests Condition="'$(RunTests)'==''">False</RunTests>
     <BuildConfiguration Condition="'$(BuildConfiguration)'==''"></BuildConfiguration>
     <BuildArchitecture Condition="'$(BuildArchitecture)'==''"></BuildArchitecture>
+    <PackageName Condition="'$(PackageName)'==''">BuildPackage.zip</PackageName>
   </PropertyGroup>
 
   <ItemGroup>

@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{36A9F164-D0C5-4F26-B14C-1D526FAEE234}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BuildScripts</RootNamespace>
+    <AssemblyName>BuildScripts</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Build.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Environment\tfs_dev.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Environment\mcworkstation8_dev.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Environment\example_dev.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Solution\Properties.xml" />
+    <Content Include="Targets\Build.Compile.xml" />
+    <Content Include="Targets\Build.Package.xml">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Targets\Build.ReleaseLog.xml" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\Interop.COMAdmin.dll" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\Interop.IWshRuntimeLibrary.dll" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\Ionic.Zip.dll" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.BizTalk.dll" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.BizTalk.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.dll" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.Iis7.dll" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.Iis7.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.Sql2005.dll" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.Sql2005.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.Sql2008.dll" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.Sql2008.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.Sql2012.dll" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.Sql2012.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.StyleCop.dll" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.StyleCop.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.Sync.dll" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.Sync.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.Tfs.dll" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.Tfs.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.Tfs2010.dll" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.Tfs2010.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.WindowsVirtualPC.dll" />
+    <Content Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.WindowsVirtualPC.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\Interop.COMAdmin.dll" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\Interop.IWshRuntimeLibrary.dll" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\Ionic.Zip.dll" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.BizTalk.dll" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.BizTalk.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.dll" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.Iis7.dll" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.Iis7.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.Loggers.dll" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.Loggers.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.Sql2005.dll" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.Sql2005.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.Sql2008.dll" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.Sql2008.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.Sql2012.dll" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.Sql2012.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.StyleCop.dll" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.StyleCop.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.Sync.dll" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.Sync.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.TaskFactory.Dlr.dll" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.TaskFactory.Dlr.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.TaskFactory.PowerShell.dll" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.TaskFactory.PowerShell.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.Tfs.dll" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.Tfs.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.Tfs2010.dll" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.Tfs2010.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.Tfs2012.dll" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.Tfs2012.pdb" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.WindowsVirtualPC.dll" />
+    <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.WindowsVirtualPC.pdb" />
+    <None Include="Targets\Build.targets" />
+    <None Include="Targets\Windows.Azure.Storage.targets">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.dll.config" />
+    <None Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.tasks" />
+    <None Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.VersionNumber.targets" />
+    <None Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.dll.config" />
+    <None Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.tasks" />
+    <None Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.VersionNumber.targets" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

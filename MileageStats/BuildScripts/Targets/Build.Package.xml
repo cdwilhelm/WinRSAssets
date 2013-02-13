@@ -3,6 +3,9 @@
 
 
   <Target Name="BuildWebPackage">
+
+    <MakeDir Directories="$(PackageLocation)"/>
+    
     <MSBuild Projects="@(SolutionsToBuild)"
              Properties="DeployOnBuild=true;
                        DeployTarget=Package;
