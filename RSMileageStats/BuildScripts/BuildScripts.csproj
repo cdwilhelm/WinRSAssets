@@ -41,12 +41,17 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Environment\mcworkstation8_dev.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Environment\example_dev.xml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Solution\Properties.xml" />
     <Content Include="Targets\Build.Compile.xml" />
-    <Content Include="Targets\Build.Package.xml" />
+    <Content Include="Targets\Build.Package.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Targets\Build.ReleaseLog.xml" />
     <None Include="Targets\Build.targets" />
     <None Include="Targets\Windows.Azure.Storage.targets">

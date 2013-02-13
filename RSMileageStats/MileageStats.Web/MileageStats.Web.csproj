@@ -364,6 +364,14 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MileageStats.Data.SqlCe\MileageStats.Data.SqlCe.csproj">
+      <Project>{a295cb97-24eb-4de9-a596-c2231f51a448}</Project>
+      <Name>MileageStats.Data.SqlCe</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MileageStats.Data.SqlServer\MileageStats.Data.SqlServer.csproj">
+      <Project>{373dd136-1e71-483c-97cc-dd1ee84296cc}</Project>
+      <Name>MileageStats.Data.SqlServer</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MileageStats.Domain\MileageStats.Domain.csproj">
       <Project>{A90A6E16-E9F0-49DC-88B2-82882DF86DC3}</Project>
       <Name>MileageStats.Domain</Name>

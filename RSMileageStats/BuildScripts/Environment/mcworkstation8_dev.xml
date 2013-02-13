@@ -1,6 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.microsoft.com/developer/msbuild/2003	..\Schemas\Microsoft.Build.xsd">
+
+  <PropertyGroup>
+    <PackageLocation>d:\publish\msbuild\package.zip</PackageLocation>
+    <SolutionRoot>D:\dev\patrickmcclory.github.com\WinRSAssets\RSMileageStats\</SolutionRoot>
+  </PropertyGroup>
   
-  
-  
-</Project>
+</Project>  
