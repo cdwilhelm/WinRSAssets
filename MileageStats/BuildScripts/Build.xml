@@ -7,7 +7,8 @@
   >
   
   <Import Condition="'$(EnvFile)' != ''" Project="$(EnvFile)" />
-  <Import Condition="'$(EnvFile)' == '' And Exists('Environment/$(ComputerName)_dev.xml')" Project="Environment/$(ComputerName)_dev.xml" />
+  <Import Condition="'$(EnvFile)' == '' And Exists('Environment/$(ComputerName)_dev.xml')" 
+          Project="Environment/$(ComputerName)_dev.xml" />
   <Import Project="Targets/Build.targets"/>
   <Import Project="Targets/Windows.Azure.Storage.targets"/>
   <Import Project="Solution/Properties.xml"/>

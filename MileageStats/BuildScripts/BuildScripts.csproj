@@ -38,18 +38,11 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Build.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="Environment\tfs_dev.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Environment\mcworkstation8_dev.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Environment\example_dev.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
+    <Content Include="Environment\tfs_dev.xml" />
+    <Content Include="Environment\mcworkstation8_dev.xml" />
+    <Content Include="Environment\example_dev.xml" />
     <Content Include="Solution\Properties.xml" />
     <Content Include="Targets\Build.Compile.xml" />
     <Content Include="Targets\Build.Package.xml">
@@ -115,9 +108,7 @@
     <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.WindowsVirtualPC.dll" />
     <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.WindowsVirtualPC.pdb" />
     <None Include="Targets\Build.targets" />
-    <None Include="Targets\Windows.Azure.Storage.targets">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    <None Include="Targets\Windows.Azure.Storage.targets" />
     <None Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.dll.config" />
     <None Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.tasks" />
     <None Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.VersionNumber.targets" />

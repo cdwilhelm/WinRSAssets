@@ -5,11 +5,31 @@
   <Target Name="BuildWebPackage">
 
     <MakeDir Directories="$(PackageLocation)"/>
+    <MakeDir Directories="$(PackageLocation)\working"/>
+    <Delete Files="$(PackageLocation)\working\*"/>
     
     <MSBuild Projects="@(SolutionsToBuild)"
              Properties="DeployOnBuild=true;
                        DeployTarget=Package;
                        PackageLocation=$(PackageLocation);"/>
+
+    <MakeDir Directories="$(PackageLocation)/$(BuildID)"/>
+    <Delete Files="$(PackageLocation)/$(BuildID)/$(BuildID).zip"/>
+
+    <MSBuild.ExtensionPack.Compression.DNZip 
+             TaskAction="Create" 
+             CompressPath="$(PackageLocation)\working\" 
+             ZipFileName="$(PackageLocation)/$(BuildID)/$(BuildID).zip"/>
+    <Delete Files="$(PackageLocation)\working\*"/>
+
+    <ItemGroup>
+      <FilesToClean Include="$(PackageLocation)\working\*.*"/>
+      <FoldersToClean Include="$(PackageLocation)\working\**"/>
+    </ItemGroup>
+
+    <Delete Files="@(FilesToClean)"/>
+    <RemoveDir Directories="@FoldersToClean"/>
+    
   </Target>
 
 </Project>
