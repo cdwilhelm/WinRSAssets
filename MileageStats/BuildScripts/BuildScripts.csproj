@@ -49,6 +49,19 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Targets\Build.ReleaseLog.xml" />
+    <Content Include="Tasks\Build.AzureStorage\BuildTasks.AzureStorage.dll" />
+    <Content Include="Tasks\Build.AzureStorage\BuildTasks.AzureStorage.pdb" />
+    <Content Include="Tasks\Build.AzureStorage\Microsoft.Data.Edm.dll" />
+    <Content Include="Tasks\Build.AzureStorage\Microsoft.Data.Edm.xml" />
+    <Content Include="Tasks\Build.AzureStorage\Microsoft.Data.OData.dll" />
+    <Content Include="Tasks\Build.AzureStorage\Microsoft.Data.OData.xml" />
+    <Content Include="Tasks\Build.AzureStorage\Microsoft.WindowsAzure.Configuration.dll" />
+    <Content Include="Tasks\Build.AzureStorage\Microsoft.WindowsAzure.Storage.dll" />
+    <Content Include="Tasks\Build.AzureStorage\Microsoft.WindowsAzure.Storage.xml" />
+    <Content Include="Tasks\Build.AzureStorage\Microsoft.WindowsAzure.StorageClient.dll" />
+    <Content Include="Tasks\Build.AzureStorage\Microsoft.WindowsAzure.StorageClient.xml" />
+    <Content Include="Tasks\Build.AzureStorage\System.Spatial.dll" />
+    <Content Include="Tasks\Build.AzureStorage\System.Spatial.xml" />
     <Content Include="Tasks\BuildExtensionPack\3.5.12.0\Interop.COMAdmin.dll" />
     <Content Include="Tasks\BuildExtensionPack\3.5.12.0\Interop.IWshRuntimeLibrary.dll" />
     <Content Include="Tasks\BuildExtensionPack\3.5.12.0\Ionic.Zip.dll" />

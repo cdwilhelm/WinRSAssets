@@ -3,15 +3,14 @@
 	xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://schemas.microsoft.com/developer/msbuild/2003	..\Schemas\Microsoft.Build.xsd"
-  DefaultTargets="BuildWebPackage"
-  >
+  DefaultTargets="BuildWebPackage">
   
   <Import Condition="'$(EnvFile)' != ''" Project="$(EnvFile)" />
   <Import Condition="'$(EnvFile)' == '' And Exists('Environment/$(ComputerName)_dev.xml')" 
           Project="Environment/$(ComputerName)_dev.xml" />
+  <Import Project="Solution/Properties.xml"/>
   <Import Project="Targets/Build.targets"/>
   <Import Project="Targets/Windows.Azure.Storage.targets"/>
-  <Import Project="Solution/Properties.xml"/>
   
   <Target Name="PublishAndDeploy" DependsOnTargets="BuildWebPackage">
     

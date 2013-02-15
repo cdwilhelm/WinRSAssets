@@ -1,5 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.microsoft.com/developer/msbuild/2003	..\Schemas\Microsoft.Build.xsd">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://schemas.microsoft.com/developer/msbuild/2003	..\Schemas\Microsoft.Build.xsd">
 
 
   <Target Name="BuildWebPackage">
@@ -20,6 +22,7 @@
              TaskAction="Create" 
              CompressPath="$(PackageLocation)\working\" 
              ZipFileName="$(PackageLocation)/$(BuildID)/$(BuildID).zip"/>
+    
     <Delete Files="$(PackageLocation)\working\*"/>
 
     <ItemGroup>

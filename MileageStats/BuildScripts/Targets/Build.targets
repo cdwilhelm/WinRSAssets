@@ -1,6 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.microsoft.com/developer/msbuild/2003	..\Schemas\Microsoft.Build.xsd">
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://schemas.microsoft.com/developer/msbuild/2003	..\Schemas\Microsoft.Build.xsd">
+
+  <PropertyGroup>
+    <ExtensionTasksPath>$(TasksRootFolder)/BuildExtensionPack/4.0.6.0/</ExtensionTasksPath>
+  </PropertyGroup>
   
+  <Import Project="$(ExtensionTasksPath)/MSBuild.ExtensionPack.tasks"/>
   <Import Project="Build.Compile.xml"/>
   <Import Project="Build.Package.xml"/>
   <Import Project="Build.ReleaseLog.xml"/>
