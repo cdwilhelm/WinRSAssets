@@ -11,7 +11,7 @@ namespace testHarnessApp
         static void Main(string[] args)
         {
             AzureStorageUpload asu = new AzureStorageUpload();
-            asu.AccountKey = "yM4Id0i1822gDY1V80612c/GQSfuaG5B2NOVRWg5mj5Oj8qZLocEdllghu1OVsCnS9Wi5hx4zAsPqWR5lIRrCw==";
+            asu.AccountKey = "this is not the account key you're looking for...";
             asu.AccountName = "pmdevusweststorageacct";
             asu.BlobName = "uploadpackage.7z";
             asu.ContainerName = "media";

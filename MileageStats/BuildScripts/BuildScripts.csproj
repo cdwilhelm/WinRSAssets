@@ -40,9 +40,9 @@
     <Content Include="Build.xml">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Environment\example_dev.xml" />
     <Content Include="Environment\tfs_dev.xml" />
     <Content Include="Environment\mcworkstation8_dev.xml" />
-    <Content Include="Environment\example_dev.xml" />
     <Content Include="Solution\Properties.xml" />
     <Content Include="Targets\Build.Compile.xml" />
     <Content Include="Targets\Build.Package.xml">

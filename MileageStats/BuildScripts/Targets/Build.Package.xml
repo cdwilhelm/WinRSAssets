@@ -13,7 +13,7 @@
     <MSBuild Projects="@(SolutionsToBuild)"
              Properties="DeployOnBuild=true;
                        DeployTarget=Package;
-                       PackageLocation=$(PackageLocation);"/>
+                       PackageLocation=$(PackageLocation)\working;"/>
 
     <MakeDir Directories="$(PackageLocation)/$(BuildID)"/>
     <Delete Files="$(PackageLocation)/$(BuildID)/$(BuildID).zip"/>
@@ -22,6 +22,11 @@
              TaskAction="Create" 
              CompressPath="$(PackageLocation)\working\" 
              ZipFileName="$(PackageLocation)/$(BuildID)/$(BuildID).zip"/>
+
+    <PropertyGroup>
+      <UploadBuildPackage>$(PackageLocation)/$(BuildID)/$(BuildID).zip</UploadBuildPackage>
+      <UploadBlobName>$(BuildID).zip</UploadBlobName>
+    </PropertyGroup>
     
     <Delete Files="$(PackageLocation)\working\*"/>
 
@@ -31,7 +36,7 @@
     </ItemGroup>
 
     <Delete Files="@(FilesToClean)"/>
-    <RemoveDir Directories="@FoldersToClean"/>
+    <RemoveDir Directories="@(FoldersToClean)"/>
     
   </Target>
 
