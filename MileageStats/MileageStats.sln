@@ -38,47 +38,58 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildTasks.AzureStorage", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildTasks.Utility", "BuildTasks.Utility\BuildTasks.Utility.csproj", "{FD06874D-A8D0-4686-8D4A-0BC3EEA23B56}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildTasks.RightScaleAutomation", "BuildTasks.RightScaleAutomation\BuildTasks.RightScaleAutomation.csproj", "{0E56AB95-9D77-4AE8-BDF3-3719BE117333}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testHarnessApp", "testHarnessApp\testHarnessApp.csproj", "{47C63721-E975-4ACC-8DBA-47321C86942F}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 10
+		SccNumberOfProjects = 12
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://192.168.1.253:8080/tfs/defaultcollection
 		SccLocalPath0 = .
-		SccProjectUniqueName1 = BuildScripts\\BuildScripts.csproj
-		SccProjectTopLevelParentUniqueName1 = MileageStats.sln
-		SccProjectName1 = BuildScripts
-		SccLocalPath1 = BuildScripts
-		SccProjectUniqueName2 = BuildTasks.AzureStorage\\BuildTasks.AzureStorage.csproj
+		SccProjectUniqueName1 = MileageStats.Web\\MileageStats.Web.csproj
+		SccProjectName1 = MileageStats.Web
+		SccLocalPath1 = MileageStats.Web
+		SccProjectUniqueName2 = MileageStats.Model\\MileageStats.Model.csproj
 		SccProjectTopLevelParentUniqueName2 = MileageStats.sln
-		SccProjectName2 = BuildTasks.AzureStorage
-		SccLocalPath2 = BuildTasks.AzureStorage
-		SccProjectUniqueName3 = MileageStats.Data.SqlCe\\MileageStats.Data.SqlCe.csproj
+		SccProjectName2 = MileageStats.Model
+		SccLocalPath2 = MileageStats.Model
+		SccProjectUniqueName3 = MileageStats.Data\\MileageStats.Data.csproj
 		SccProjectTopLevelParentUniqueName3 = MileageStats.sln
-		SccProjectName3 = MileageStats.Data.SqlCe
-		SccLocalPath3 = MileageStats.Data.SqlCe
-		SccProjectUniqueName4 = MileageStats.Data.SqlServer\\MileageStats.Data.SqlServer.csproj
-		SccProjectTopLevelParentUniqueName4 = MileageStats.sln
-		SccProjectName4 = MileageStats.Data.SqlServer
-		SccLocalPath4 = MileageStats.Data.SqlServer
-		SccProjectUniqueName5 = MileageStats.Data\\MileageStats.Data.csproj
+		SccProjectName3 = MileageStats.Data
+		SccLocalPath3 = MileageStats.Data
+		SccProjectUniqueName4 = testHarnessApp\\testHarnessApp.csproj
+		SccProjectName4 = testHarnessApp
+		SccLocalPath4 = testHarnessApp
+		SccProjectUniqueName5 = BuildTasks.RightScaleAutomation\\BuildTasks.RightScaleAutomation.csproj
 		SccProjectTopLevelParentUniqueName5 = MileageStats.sln
-		SccProjectName5 = MileageStats.Data
-		SccLocalPath5 = MileageStats.Data
-		SccProjectUniqueName6 = MileageStats.Domain\\MileageStats.Domain.csproj
+		SccProjectName5 = BuildTasks.RightScaleAutomation
+		SccLocalPath5 = BuildTasks.RightScaleAutomation
+		SccProjectUniqueName6 = BuildTasks.Utility\\BuildTasks.Utility.csproj
 		SccProjectTopLevelParentUniqueName6 = MileageStats.sln
-		SccProjectName6 = MileageStats.Domain
-		SccLocalPath6 = MileageStats.Domain
-		SccProjectUniqueName7 = MileageStats.Model\\MileageStats.Model.csproj
+		SccProjectName6 = BuildTasks.Utility
+		SccLocalPath6 = BuildTasks.Utility
+		SccProjectUniqueName7 = BuildTasks.AzureStorage\\BuildTasks.AzureStorage.csproj
 		SccProjectTopLevelParentUniqueName7 = MileageStats.sln
-		SccProjectName7 = MileageStats.Model
-		SccLocalPath7 = MileageStats.Model
-		SccProjectUniqueName8 = MileageStats.Web\\MileageStats.Web.csproj
-		SccProjectName8 = MileageStats.Web
-		SccLocalPath8 = MileageStats.Web
-		SccProjectUniqueName9 = BuildTasks.Utility\\BuildTasks.Utility.csproj
+		SccProjectName7 = BuildTasks.AzureStorage
+		SccLocalPath7 = BuildTasks.AzureStorage
+		SccProjectUniqueName8 = MileageStats.Data.SqlServer\\MileageStats.Data.SqlServer.csproj
+		SccProjectTopLevelParentUniqueName8 = MileageStats.sln
+		SccProjectName8 = MileageStats.Data.SqlServer
+		SccLocalPath8 = MileageStats.Data.SqlServer
+		SccProjectUniqueName9 = BuildScripts\\BuildScripts.csproj
 		SccProjectTopLevelParentUniqueName9 = MileageStats.sln
-		SccProjectName9 = BuildTasks.Utility
-		SccLocalPath9 = BuildTasks.Utility
+		SccProjectName9 = BuildScripts
+		SccLocalPath9 = BuildScripts
+		SccProjectUniqueName10 = MileageStats.Data.SqlCe\\MileageStats.Data.SqlCe.csproj
+		SccProjectTopLevelParentUniqueName10 = MileageStats.sln
+		SccProjectName10 = MileageStats.Data.SqlCe
+		SccLocalPath10 = MileageStats.Data.SqlCe
+		SccProjectUniqueName11 = MileageStats.Domain\\MileageStats.Domain.csproj
+		SccProjectTopLevelParentUniqueName11 = MileageStats.sln
+		SccProjectName11 = MileageStats.Domain
+		SccLocalPath11 = MileageStats.Domain
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = MileageStats.vsmdi
@@ -124,6 +135,14 @@ Global
 		{FD06874D-A8D0-4686-8D4A-0BC3EEA23B56}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FD06874D-A8D0-4686-8D4A-0BC3EEA23B56}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FD06874D-A8D0-4686-8D4A-0BC3EEA23B56}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0E56AB95-9D77-4AE8-BDF3-3719BE117333}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0E56AB95-9D77-4AE8-BDF3-3719BE117333}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0E56AB95-9D77-4AE8-BDF3-3719BE117333}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0E56AB95-9D77-4AE8-BDF3-3719BE117333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47C63721-E975-4ACC-8DBA-47321C86942F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47C63721-E975-4ACC-8DBA-47321C86942F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47C63721-E975-4ACC-8DBA-47321C86942F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47C63721-E975-4ACC-8DBA-47321C86942F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -136,6 +155,7 @@ Global
 		{A90A6E16-E9F0-49DC-88B2-82882DF86DC3} = {F1AB27BD-3126-423E-B6F1-322738593053}
 		{22F8F53E-2CCC-4AAC-97B8-0FA0D96179A1} = {D1C8FC01-8ED3-4C89-BA6C-CF862E317D8A}
 		{FD06874D-A8D0-4686-8D4A-0BC3EEA23B56} = {D1C8FC01-8ED3-4C89-BA6C-CF862E317D8A}
+		{0E56AB95-9D77-4AE8-BDF3-3719BE117333} = {D1C8FC01-8ED3-4C89-BA6C-CF862E317D8A}
 		{36A9F164-D0C5-4F26-B14C-1D526FAEE234} = {9AD6314B-A9B4-49CE-A547-84B1490D0911}
 	EndGlobalSection
 EndGlobal

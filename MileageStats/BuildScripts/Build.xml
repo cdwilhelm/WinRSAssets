@@ -13,4 +13,8 @@
   <Import Project="Targets/Windows.Azure.Storage.targets"/>
   <Import Project="Solution/Properties.xml"/>
   
+  <Target Name="PublishAndDeploy" DependsOnTargets="BuildWebPackage">
+    
+  </Target>
+  
 </Project>

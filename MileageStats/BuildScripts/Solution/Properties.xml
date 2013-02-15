@@ -3,7 +3,7 @@
   
   <!-- Configurations for build process itself -->
   <PropertyGroup>
-    <TasksRootFolder Condition="'$(TasksRootFolder)'==''">$(InstallRootPath)\BuildScripts\Tasks</TasksRootFolder>
+    <TasksRootFolder Condition="'$(TasksRootFolder)'==''">$(MSBuildProjectDirectory)\Tasks\</TasksRootFolder>
     <SolutionRoot Condition="'$(SolutionRoot)'==''">$(MSBuildProjectDirectory)\..\</SolutionRoot>
   </PropertyGroup>
   

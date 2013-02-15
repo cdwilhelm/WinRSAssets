@@ -108,7 +108,9 @@
     <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.WindowsVirtualPC.dll" />
     <Content Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.WindowsVirtualPC.pdb" />
     <None Include="Targets\Build.targets" />
-    <None Include="Targets\Windows.Azure.Storage.targets" />
+    <None Include="Targets\Windows.Azure.Storage.targets">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.dll.config" />
     <None Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.tasks" />
     <None Include="Tasks\BuildExtensionPack\3.5.12.0\MSBuild.ExtensionPack.VersionNumber.targets" />
