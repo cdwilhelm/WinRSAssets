@@ -78,6 +78,10 @@
       <Project>{22f8f53e-2ccc-4aac-97b8-0fa0d96179a1}</Project>
       <Name>BuildTasks.AzureStorage</Name>
     </ProjectReference>
+    <ProjectReference Include="..\BuildTasks.RightScaleAutomation\BuildTasks.RightScaleAutomation.csproj">
+      <Project>{0e56ab95-9d77-4ae8-bdf3-3719be117333}</Project>
+      <Name>BuildTasks.RightScaleAutomation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

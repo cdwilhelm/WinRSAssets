@@ -10,7 +10,7 @@ namespace BuildTasks.AzureStorage.Base
     /// <summary>
     /// Base class for encapsulating common processes/workflows for accessing Windows Azure Storage
     /// </summary>
-    public abstract class AzureStorageBase : Task
+    internal abstract class AzureStorageBase : Task
     {
         /// <summary>
 
@@ -58,8 +58,14 @@ namespace BuildTasks.AzureStorage.Base
         /// </summary>
         public AzureStorageBase()
         {
-            this.DefaultEndpointsProtocol = "https";
-            this.UseDevelopmentStorage = false;
+            if (string.IsNullOrWhiteSpace(this.DefaultEndpointsProtocol))
+            {
+                this.DefaultEndpointsProtocol = "https";
+            }
+            if (!this.UseDevelopmentStorage)
+            {
+                this.UseDevelopmentStorage = false;
+            }
         }
 
         /// <summary>
