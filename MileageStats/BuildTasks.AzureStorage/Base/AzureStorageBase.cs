@@ -10,7 +10,7 @@ namespace BuildTasks.AzureStorage.Base
     /// <summary>
     /// Base class for encapsulating common processes/workflows for accessing Windows Azure Storage
     /// </summary>
-    internal abstract class AzureStorageBase : Task
+    public abstract class AzureStorageBase : Task
     {
         /// <summary>
 

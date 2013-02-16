@@ -43,54 +43,6 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testHarnessApp", "testHarnessApp\testHarnessApp.csproj", "{47C63721-E975-4ACC-8DBA-47321C86942F}"
 EndProject
 Global
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 12
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = http://192.168.1.253:8080/tfs/defaultcollection
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = MileageStats.Web\\MileageStats.Web.csproj
-		SccProjectName1 = MileageStats.Web
-		SccLocalPath1 = MileageStats.Web
-		SccProjectUniqueName2 = MileageStats.Model\\MileageStats.Model.csproj
-		SccProjectTopLevelParentUniqueName2 = MileageStats.sln
-		SccProjectName2 = MileageStats.Model
-		SccLocalPath2 = MileageStats.Model
-		SccProjectUniqueName3 = MileageStats.Data\\MileageStats.Data.csproj
-		SccProjectTopLevelParentUniqueName3 = MileageStats.sln
-		SccProjectName3 = MileageStats.Data
-		SccLocalPath3 = MileageStats.Data
-		SccProjectUniqueName4 = testHarnessApp\\testHarnessApp.csproj
-		SccProjectName4 = testHarnessApp
-		SccLocalPath4 = testHarnessApp
-		SccProjectUniqueName5 = BuildTasks.RightScaleAutomation\\BuildTasks.RightScaleAutomation.csproj
-		SccProjectTopLevelParentUniqueName5 = MileageStats.sln
-		SccProjectName5 = BuildTasks.RightScaleAutomation
-		SccLocalPath5 = BuildTasks.RightScaleAutomation
-		SccProjectUniqueName6 = BuildTasks.Utility\\BuildTasks.Utility.csproj
-		SccProjectTopLevelParentUniqueName6 = MileageStats.sln
-		SccProjectName6 = BuildTasks.Utility
-		SccLocalPath6 = BuildTasks.Utility
-		SccProjectUniqueName7 = BuildTasks.AzureStorage\\BuildTasks.AzureStorage.csproj
-		SccProjectTopLevelParentUniqueName7 = MileageStats.sln
-		SccProjectName7 = BuildTasks.AzureStorage
-		SccLocalPath7 = BuildTasks.AzureStorage
-		SccProjectUniqueName8 = MileageStats.Data.SqlServer\\MileageStats.Data.SqlServer.csproj
-		SccProjectTopLevelParentUniqueName8 = MileageStats.sln
-		SccProjectName8 = MileageStats.Data.SqlServer
-		SccLocalPath8 = MileageStats.Data.SqlServer
-		SccProjectUniqueName9 = BuildScripts\\BuildScripts.csproj
-		SccProjectTopLevelParentUniqueName9 = MileageStats.sln
-		SccProjectName9 = BuildScripts
-		SccLocalPath9 = BuildScripts
-		SccProjectUniqueName10 = MileageStats.Data.SqlCe\\MileageStats.Data.SqlCe.csproj
-		SccProjectTopLevelParentUniqueName10 = MileageStats.sln
-		SccProjectName10 = MileageStats.Data.SqlCe
-		SccLocalPath10 = MileageStats.Data.SqlCe
-		SccProjectUniqueName11 = MileageStats.Domain\\MileageStats.Domain.csproj
-		SccProjectTopLevelParentUniqueName11 = MileageStats.sln
-		SccProjectName11 = MileageStats.Domain
-		SccLocalPath11 = MileageStats.Domain
-	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = MileageStats.vsmdi
 	EndGlobalSection

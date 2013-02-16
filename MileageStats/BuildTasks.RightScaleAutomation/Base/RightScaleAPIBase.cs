@@ -8,7 +8,7 @@ using RestSharp;
 
 namespace BuildTasks.RightScaleAutomation.Base
 {
-    internal abstract class RightScaleAPIBase : Task
+    public abstract class RightScaleAPIBase : Task
     {
         /// <summary>
         /// OAuth2 Token for RightScale API Access.  Information on how to generate this key can be found at http://support.rightscale.com/12-Guides/03-RightScale_API/OAuth
@@ -31,15 +31,16 @@ namespace BuildTasks.RightScaleAutomation.Base
         {
             if (string.IsNullOrWhiteSpace(this.BaseUri))
             {
-                this.BaseUri = "https://my.rightscale.com/api/";
+                this.BaseUri = "https://my.rightscale.com/api";
             }
             restClient = new RestClient();
             restClient.BaseUrl = this.BaseUri;
+            restClient.Timeout = 120000;
         }
 
         internal void prepareCall()
         {
-            restClient.Authenticator = new OAuth2AuthorizationRequestHeaderAuthenticator("Bearer " + this.OAuth2Token);
+            restClient.AddDefaultHeader("Authorization", "Bearer " + this.OAuth2Token);
             restClient.AddDefaultHeader(ApiHeaderName, ApiHeaderValue);
         }
 

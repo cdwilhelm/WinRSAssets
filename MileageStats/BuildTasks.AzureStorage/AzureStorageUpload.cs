@@ -23,12 +23,12 @@ namespace BuildTasks.AzureStorage
         /// <summary>
         /// Override to Build Task.Execute() method 
         /// </summary>
-        /// <returns></returns>
+        /// <returns>true if success, false if not/returns>
         public override bool Execute()
         {
             bool retVal = false;
             string connectionString = GetStorageConnectionString();
-            //Log.LogMessage("Connection string is: " + connectionString);
+            Log.LogMessage("Connection string is: " + connectionString);
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
             CloudBlobContainer blobContainer = blobClient.GetContainerReference(this.ContainerName);

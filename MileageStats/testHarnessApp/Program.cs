@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using BuildTasks.AzureStorage;
+using BuildTasks.RightScaleAutomation;
 
 namespace testHarnessApp
 {
@@ -10,16 +10,15 @@ namespace testHarnessApp
     {
         static void Main(string[] args)
         {
-            AzureStorageUpload asu = new AzureStorageUpload();
-            asu.AccountKey = "this is not the account key you're looking for...";
-            asu.AccountName = "pmdevusweststorageacct";
-            asu.BlobName = "uploadpackage.7z";
-            asu.ContainerName = "media";
-            asu.DefaultEndpointsProtocol = "https";
-            asu.FilePath = @"D:\publish\publish.7z";
-            asu.UseDevelopmentStorage = false;
+            GetRSOAuthToken oauthtoken = new GetRSOAuthToken();
+            oauthtoken.OAuthRefreshToken = "tokengoeshere";
+            oauthtoken.Execute();
 
-            asu.Execute();
+            LaunchRSServer lrss = new LaunchRSServer();
+
+            lrss.ServerID = "703265001";
+            lrss.OAuth2Token = "tokengoeshere";
+            lrss.Execute();
         }
     }
 }
