@@ -12,7 +12,7 @@ namespace BuildTasks.AzureStorage.Base
     /// </summary>
     public abstract class AzureStorageBase : Task
     {
-        /// <summary>
+        #region Build task properties
 
         /// <summary>
         /// Defines the default protocol to be used for accessing the Blob Endpoint
@@ -53,20 +53,16 @@ namespace BuildTasks.AzureStorage.Base
         /// </summary>
         public bool UseDevelopmentStorage { get; set; }
 
+        #endregion
+
         /// <summary>
         /// Constructor initializes base object's optional properties
         /// </summary>
         public AzureStorageBase()
         {
             Log.LogMessage("  Base class AzureStorageBase is initializing");
-            if (string.IsNullOrWhiteSpace(this.DefaultEndpointsProtocol))
-            {
-                this.DefaultEndpointsProtocol = "https";
-            }
-            if (!this.UseDevelopmentStorage)
-            {
-                this.UseDevelopmentStorage = false;
-            }
+            this.DefaultEndpointsProtocol = "https";
+            this.UseDevelopmentStorage = false;
         }
 
         /// <summary>

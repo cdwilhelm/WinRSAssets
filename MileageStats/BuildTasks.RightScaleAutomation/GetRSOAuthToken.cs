@@ -13,11 +13,17 @@ namespace BuildTasks.RightScaleAutomation
     /// </summary>
     public class GetRSOAuthToken : Task
     {
+        #region Required Input Parameters
+
         /// <summary>
         /// Refresh token for the account that is being programmatically accessed.  This information is found on the RightScale dashboard and information on the process can be found on the RightScale Support site: http://support.rightscale.com/12-Guides/03-RightScale_API/OAuth
         /// </summary>
         [Required]
         public string OAuthRefreshToken { get; set; }
+
+        #endregion
+
+        #region Output Variables
 
         /// <summary>
         /// Output parameter for MSBuild to access the OAuth token created for subsequent calls to the RightScale API
@@ -25,20 +31,26 @@ namespace BuildTasks.RightScaleAutomation
         [Output]
         public string OAuthAccessToken { get; set; }
 
+        #endregion
+
+        #region Optional Input Parameters
+
         /// <summary>
         /// OAuth URL for accessing the API's token generation process
         /// </summary>
         public string OAuthURL { get; set; }
 
         /// <summary>
-        /// Name for HTTP header which identifies the version of the RightScale API being accessed
-        /// </summary>
-        private const string APIVerHeaderName = "X_API_VERSION";
-
-        /// <summary>
         /// API Version to be used when identifying the RightScale API Version
         /// </summary>
         public string APIVersionHeaderValue { get; set; }
+
+        #endregion
+
+        /// <summary>
+        /// Name for HTTP header which identifies the version of the RightScale API being accessed
+        /// </summary>
+        private const string APIVerHeaderName = "X_API_VERSION";
 
         /// <summary>
         /// Private constructor defines default values for non-required inputs

@@ -36,21 +36,12 @@ namespace BuildTasks.RightScaleAutomation.Base
         /// </summary>
         public Int64 ServerID { get; set; }
 
-        /// <summary>
-        /// HTTP Header name for identifying which version of the API is being accessed
-        /// </summary>
-        private const string ApiHeaderName = "X_API_VERSION";
 
         /// <summary>
         /// HTTP Header value for identifying which version of the API is being accessed
         /// </summary>
         public string ApiHeaderValue { get; set; }
         
-        /// <summary>
-        /// Common instance of RestSharp.RestClient object for executing requests to RightScale API
-        /// </summary>
-        protected RestClient restClient;
-
         /// <summary>
         /// HREF for methods for a given and speciifc call to the api.  This is prepended with the BaseUri value when contructing full URLs for request paths
         /// </summary>
@@ -62,6 +53,20 @@ namespace BuildTasks.RightScaleAutomation.Base
         public int ApiClientTimeout { get; set; }
 
         #endregion
+
+        #region Internal objects and static values
+
+        /// <summary>
+        /// Common instance of RestSharp.RestClient object for executing requests to RightScale API
+        /// </summary>
+        protected RestClient restClient;
+
+        /// <summary>
+        /// HTTP Header name for identifying which version of the API is being accessed
+        /// </summary>
+        private const string ApiHeaderName = "X_API_VERSION";
+
+    #endregion
 
         /// <summary>
         /// Base class constructor initializes all optional parameters. 

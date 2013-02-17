@@ -14,6 +14,8 @@ namespace BuildTasks.RightScaleAutomation
     /// </summary>
     public class GetInstanceInfo : Base.RightScaleAPIBase
     {
+        #region Output Variables
+
         /// <summary>
         /// ID of the server to be queried
         /// </summary>
@@ -61,6 +63,8 @@ namespace BuildTasks.RightScaleAutomation
         /// </summary>
         [Output]
         public string State { get; set; }
+
+        #endregion
 
         /// <summary>
         /// Constructor initializes defaults variables that are not required inputs
