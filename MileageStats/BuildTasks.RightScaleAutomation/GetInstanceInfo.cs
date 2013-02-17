@@ -71,7 +71,6 @@ namespace BuildTasks.RightScaleAutomation
         /// </summary>
         public GetInstanceInfo()
         {
-            Log.LogMessage("GetInstanceInfo MSBuild Task is initiating");
             this.MethodHref = @"/api/clouds/{0}/instances/{1}";
         }
 

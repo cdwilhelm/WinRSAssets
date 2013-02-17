@@ -60,7 +60,6 @@ namespace BuildTasks.AzureStorage.Base
         /// </summary>
         public AzureStorageBase()
         {
-            Log.LogMessage("  Base class AzureStorageBase is initializing");
             this.DefaultEndpointsProtocol = "https";
             this.UseDevelopmentStorage = false;
         }

@@ -72,7 +72,6 @@ namespace BuildTasks.RightScaleAutomation
         /// <returns>true if the process was successful, false if not</returns>
         public override bool Execute()
         {
-            Log.LogMessage("  GetRSOAuthToken.Execute - beginning at " + DateTime.Now.ToString());
             bool retVal = false;
             ValidateInputs();
             prepareCall();

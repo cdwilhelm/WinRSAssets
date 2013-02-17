@@ -72,9 +72,7 @@ namespace BuildTasks.RightScaleAutomation.Base
         /// Base class constructor initializes all optional parameters. 
         /// </summary>
         public RightScaleAPIBase()
-        {
-            Log.LogMessage("  Base class RightScaleAPIBase is initializing");
-            
+        {            
             this.BaseUri = @"https://my.rightscale.com/api"; //default endpoint for RS API 1.5
             this.ApiClientTimeout = 120; //setting default timeout to 2 mins/120 seconds
             this.ApiHeaderValue = "1.5"; //default is API 1.5

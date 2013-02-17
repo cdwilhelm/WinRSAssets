@@ -57,7 +57,6 @@ namespace BuildTasks.RightScaleAutomation
         /// </summary>
         public GetRSOAuthToken ()
 	    {
-            Log.LogMessage("GetRSOAuthToken MSBuild task is initiating");
             this.OAuthURL = @"https://my.rightscale.com/api/oauth2"; //oauth url for API 1.5
             this.APIVersionHeaderValue = "1.5"; //API ver 1.5 identified 
 	    }
