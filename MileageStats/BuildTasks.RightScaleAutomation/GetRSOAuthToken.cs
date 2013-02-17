@@ -99,13 +99,27 @@ namespace BuildTasks.RightScaleAutomation
 
             var OAuthResponseObject = Base.DynamicJsonSerializer.Deserialize<dynamic>(streamContents);
 
-            this.OAuthAccessToken = OAuthResponseObject.access_token.ToString();
-            Log.LogMessage("    GetRSOAuthToken.Execute - OAuth bearer token output to variable for MSBuild");
-            if (!string.IsNullOrWhiteSpace(this.OAuthAccessToken))
+            //dynamic class is a little sloppy, but works here since I really just need one value out of the collection
+            if (OAuthResponseObject != null && OAuthResponseObject.access_token != null)
             {
-                Log.LogMessage("    GetRSOAuthToken.Execute - Success!");
-                retVal = true;
+                //TODO: should clean this up once we build out an actual object class model
+                this.OAuthAccessToken = OAuthResponseObject.access_token.ToString();
+                Log.LogMessage("    GetRSOAuthToken.Execute - OAuth bearer token output to variable for MSBuild");
+                if (!string.IsNullOrWhiteSpace(this.OAuthAccessToken))
+                {
+                    Log.LogMessage("    GetRSOAuthToken.Execute - Success!");
+                    retVal = true;
+                }
+                else
+                {
+                    Log.LogError("    GetRSOAuthToken.Execute - Failure - not sure how this usecase would happen");
+                }
             }
+            else
+            {
+                Log.LogError("    GetRSOAuthToken.Execute - Failure - Response Json object was missing the access_token");
+            }
+            
             Log.LogMessage("  GetRSOAuthToken.Execute - complete at " + DateTime.Now.ToString());
             return retVal;
         }

@@ -15,7 +15,8 @@ namespace BuildTasks.RightScaleAutomation
     public class LaunchRSServer : Base.RightScaleAPIBase
     {
         #region Optional Input Parameters
-        
+        // These are mostly optional because they can be set at the server or deployment level within the RightScale platform--it may not be necessary to pass these in all the time, but it's certainly available if need be.
+   
         /// <summary>
         /// Name of the Web package container to be used when deploying via MSDeploy on the server from Windows Azure Storage - used to point the RghtScale ServerTemplate to the proper place to download the packaged MSBuild artifact
         /// Values can either be in the form of "text:raw_value" or a pointer to an existing RightScale Credential "cred:existing_cred"
