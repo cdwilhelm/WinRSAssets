@@ -25,9 +25,30 @@ namespace BuildTasks.RightScaleAutomation
         [Output]
         public string OAuthAccessToken { get; set; }
 
-        private const string OAuthURL = @"https://my.rightscale.com/api/oauth2";
+        /// <summary>
+        /// OAuth URL for accessing the API's token generation process
+        /// </summary>
+        public string OAuthURL { get; set; }
+
+        /// <summary>
+        /// Name for HTTP header which identifies the version of the RightScale API being accessed
+        /// </summary>
         private const string APIVerHeaderName = "X_API_VERSION";
-        private const string APIVerHeaderValue = "1.5";
+
+        /// <summary>
+        /// API Version to be used when identifying the RightScale API Version
+        /// </summary>
+        public string APIVersionHeaderValue { get; set; }
+
+        /// <summary>
+        /// Private constructor defines default values for non-required inputs
+        /// </summary>
+        public GetRSOAuthToken ()
+	    {
+            Log.LogMessage("GetRSOAuthToken MSBuild task is initiating");
+            this.OAuthURL = @"https://my.rightscale.com/api/oauth2"; //oauth url for API 1.5
+            this.APIVersionHeaderValue = "1.5"; //API ver 1.5 identified 
+	    }
 
         /// <summary>
         /// Override to Task.Execute method containing the custom process for gathering the OAuth key from the RightScale system
@@ -35,12 +56,13 @@ namespace BuildTasks.RightScaleAutomation
         /// <returns>true if an OAuth Access Token was retrieved, false if not</returns>
         public override bool Execute()
         {
+            Log.LogMessage("  GetRSOAuthToken.Execute - beginning at " + DateTime.Now.ToString());
             bool retVal = false;
 
             WebRequest request = WebRequest.Create(OAuthURL);
 
             request.Method = "POST";
-            request.Headers.Add(APIVerHeaderName, APIVerHeaderValue);
+            request.Headers.Add(APIVerHeaderName, this.APIVersionHeaderValue);
 
             string requestString = string.Format("grant_type=refresh_token;refresh_token={0};", this.OAuthRefreshToken);
             byte[] postData = System.Text.Encoding.UTF8.GetBytes(requestString);
@@ -50,25 +72,29 @@ namespace BuildTasks.RightScaleAutomation
                 requestStream.Write(postData, 0, postData.Length);
             }
 
+            Log.LogMessage("    GetRSOAuthToken.Execute - Getting Response from API endpoint");
+
             WebResponse response = request.GetResponse();
             string streamContents = string.Empty;
             using (var responseStream = response.GetResponseStream())
             {
                 using (System.IO.StreamReader streamReader = new System.IO.StreamReader(responseStream))
                 {
+                    Log.LogMessage("    GetRSOAuthToken.Execute - reading data from response stream");
                     streamContents = streamReader.ReadToEnd();
                 }
             }
 
-            var OAuthResponseObject = Base.DynamicJsonDeserializer.Deserialize<dynamic>(streamContents);
+            var OAuthResponseObject = Base.DynamicJsonSerializer.Deserialize<dynamic>(streamContents);
 
             this.OAuthAccessToken = OAuthResponseObject.access_token.ToString();
-
+            Log.LogMessage("    GetRSOAuthToken.Execute - OAuth bearer token output to variable for MSBuild");
             if (!string.IsNullOrWhiteSpace(this.OAuthAccessToken))
             {
+                Log.LogMessage("    GetRSOAuthToken.Execute - Success!");
                 retVal = true;
             }
-
+            Log.LogMessage("  GetRSOAuthToken.Execute - complete at " + DateTime.Now.ToString());
             return retVal;
         }
     }

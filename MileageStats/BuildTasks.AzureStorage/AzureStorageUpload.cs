@@ -26,18 +26,26 @@ namespace BuildTasks.AzureStorage
         /// <returns>true if success, false if not/returns>
         public override bool Execute()
         {
+            Log.LogMessage("  AzureStorageUpload.Execute - beginning at " + DateTime.Now.ToString());
             bool retVal = false;
             string connectionString = GetStorageConnectionString();
             Log.LogMessage("Connection string is: " + connectionString);
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
+            Log.LogMessage("    AzureStorageUpload.Execute - Connection string is valid");
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();
             CloudBlobContainer blobContainer = blobClient.GetContainerReference(this.ContainerName);
             CloudBlockBlob blockBlob = blobContainer.GetBlockBlobReference(this.BlobName);
             using (var filestream = System.IO.File.OpenRead(this.FilePath))
             {
+                Log.LogMessage("    AzureStorageUpload.Execute - Upload beginning");
+                DateTime starttime = DateTime.Now;
                 blockBlob.UploadFromStream(filestream);
                 retVal = true;
+                DateTime endtime = DateTime.Now;
+                Log.LogMessage("    AzureStorageUpload.Execute - Upload completed in " + endtime.Subtract(starttime).TotalSeconds.ToString());
             }
+
+            Log.LogMessage("  AzureStorageUpload.Execute - complete at " + DateTime.Now.ToString());
 
             return retVal;
         }

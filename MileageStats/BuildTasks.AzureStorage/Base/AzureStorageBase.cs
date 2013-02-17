@@ -58,6 +58,7 @@ namespace BuildTasks.AzureStorage.Base
         /// </summary>
         public AzureStorageBase()
         {
+            Log.LogMessage("  Base class AzureStorageBase is initializing");
             if (string.IsNullOrWhiteSpace(this.DefaultEndpointsProtocol))
             {
                 this.DefaultEndpointsProtocol = "https";
@@ -91,6 +92,7 @@ namespace BuildTasks.AzureStorage.Base
 
             retVal = retVal.TrimEnd(';');
 
+            Log.LogMessage("    AzureStorageBase.GetStorageConnectionString - done building connection string");
             return retVal;
         }
 

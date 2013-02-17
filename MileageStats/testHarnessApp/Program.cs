@@ -16,7 +16,7 @@ namespace testHarnessApp
 
             LaunchRSServer lrss = new LaunchRSServer();
 
-            lrss.ServerID = "703265001";
+            lrss.ServerID = 703265001;
             lrss.OAuth2Token = "tokengoeshere";
             lrss.Execute();
         }

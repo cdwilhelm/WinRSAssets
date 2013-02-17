@@ -21,6 +21,7 @@
     <MSBuild.ExtensionPack.Compression.DNZip 
              TaskAction="Create" 
              CompressPath="$(PackageLocation)\working\" 
+             RemoveRoot="$(PackageLocation)\working\"
              ZipFileName="$(PackageLocation)/$(BuildID)/$(BuildID).zip"/>
 
     <PropertyGroup>

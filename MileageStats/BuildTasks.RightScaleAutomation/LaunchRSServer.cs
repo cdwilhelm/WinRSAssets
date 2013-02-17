@@ -14,11 +14,6 @@ namespace BuildTasks.RightScaleAutomation
     /// </summary>
     public class LaunchRSServer : Base.RightScaleAPIBase
     {
-        /// <summary>
-        /// ID of the server to be launched
-        /// </summary>
-        [Required]
-        public string ServerID { get; set; }
 
         /// <summary>
         /// Name of the Web package container to be used when deploying via MSDeploy on the server from Windows Azure Storage
@@ -44,14 +39,39 @@ namespace BuildTasks.RightScaleAutomation
         /// <returns>true if the process was successful, false if not</returns>
         public override bool Execute()
         {
+            Log.LogMessage("  GetRSOAuthToken.Execute - beginning at " + DateTime.Now.ToString());
+            bool retVal = false;
+            ValidateInputs();
             prepareCall();
-
+            
             RestRequest request = new RestRequest(Method.POST);
-            request.Resource = string.Format(this.MethodHref, ServerID.Trim());
+            request.Resource = string.Format(this.MethodHref, ServerID.ToString());
 
             RestResponse response = (RestResponse)restClient.Post(request);
 
-           throw new NotImplementedException();
+
+            Log.LogMessage("  LaunchRSServer.Execute - complete at " + DateTime.Now.ToString());
+            return retVal;
+        }
+
+        /// <summary>
+        /// Implementing Input validation process for this MSBuild task to ensure ServerID is populated
+        /// </summary>
+        protected override void ValidateInputs()
+        {
+            string errorMessage = string.Empty;
+            if (this.ServerID == null)
+            {
+                errorMessage += "ServerID is not defined and is required. ";
+            }
+            if (!string.IsNullOrWhiteSpace(errorMessage))
+            {
+                throw new ArgumentNullException("Errors were found when attempting to validate inputs for the GetInstanceInfo MSBuild Task: " + errorMessage);
+            }
+            else
+            {
+                Log.LogMessage(@"  GetInstanceInfo.ValidateInputs - inputs validated - ServerID (" + this.ServerID.ToString() + @")");
+            }
         }
     }
 }
