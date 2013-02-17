@@ -11,5 +11,6 @@
   <Import Project="Build.Compile.xml"/>
   <Import Project="Build.Package.xml"/>
   <Import Project="Build.ReleaseLog.xml"/>
+  <Import Project="Build.RightScaleAutomation.xml"/>
 
 </Project>

@@ -32,8 +32,7 @@ namespace BuildTasks.RightScaleAutomation.Base
 
                 retVal += @"</parameters>";
             }
-            HttpServerUtility serverUtil = new HttpServerUtility();
-            return serverUtil.UrlEncode(retVal);
+            return HttpUtility.UrlEncode(retVal);
         }
     }
 }

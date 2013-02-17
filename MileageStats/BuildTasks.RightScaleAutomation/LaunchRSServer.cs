@@ -81,6 +81,10 @@ namespace BuildTasks.RightScaleAutomation
 
             RestResponse response = (RestResponse)restClient.Post(request);
 
+            if (response.StatusCode == System.Net.HttpStatusCode.Created) //looking for a 201 completed
+            {
+                retVal = true;
+            }
 
             Log.LogMessage("  LaunchRSServer.Execute - complete at " + DateTime.Now.ToString());
             return retVal;
@@ -96,7 +100,7 @@ namespace BuildTasks.RightScaleAutomation
             {
                 errorMessage += @"The Remote Object Storage Type selected (" + this.ROSProviderName + @") does not match one of the supported ROS Providers";
             }
-            if (this.ServerID == null)
+            if (string.IsNullOrWhiteSpace(this.ServerID))
             {
                 errorMessage += "ServerID is not defined and is required. ";
             }
@@ -111,3 +115,4 @@ namespace BuildTasks.RightScaleAutomation
         }
     }
 }
+

@@ -20,7 +20,7 @@ namespace BuildTasks.RightScaleAutomation
         /// ID of the server to be queried
         /// </summary>
         [Required]
-        public int ServerID { get; set; }
+        public string ServerID { get; set; }
 
         /// <summary>
         /// Collection of Private IP addresses assigned to the given instance
@@ -89,6 +89,8 @@ namespace BuildTasks.RightScaleAutomation
             Log.LogMessage("  GetInstanceInfo.Execute - making call to restClient");
             RestResponse response = (RestResponse)restClient.Post(request);
 
+            dynamic responseObject = Base.DynamicJsonSerializer.Deserialize<dynamic>(response.Content);
+
             //TODO: finish implementing execute and parse data back out to output variables as necessary
 
             Log.LogMessage("  GetInstanceInfo.Execute - complete at " + DateTime.Now.ToString());
@@ -101,11 +103,11 @@ namespace BuildTasks.RightScaleAutomation
         protected override void ValidateInputs()
         {
             string errorMessage = string.Empty;
-            if (this.CloudID == null)
+            if (string.IsNullOrWhiteSpace(this.CloudID))
             {
                 errorMessage += "CloudID is not defined and is required. ";
             }
-            if (this.ServerID == null)
+            if (string.IsNullOrWhiteSpace(this.ServerID))
             {
                 errorMessage += "ServerID is not defined and is required. ";
             }

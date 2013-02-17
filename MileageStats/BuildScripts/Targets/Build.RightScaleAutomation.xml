@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://schemas.microsoft.com/developer/msbuild/2003	..\Schemas\Microsoft.Build.xsd">
+
+  <UsingTask
+    AssemblyFile="$(TasksRootFolder)\Build.RightScaleAutomation\BuildTasks.RightScaleAutomation.dll"
+    TaskName="GetRSOAuthToken" />
+  <UsingTask
+    AssemblyFile="$(TasksRootFolder)\Build.RightScaleAutomation\BuildTasks.RightScaleAutomation.dll"
+    TaskName="LaunchRSServer" />
+  
+  <Target Name="InitRSApi">
+
+    <Message Text="RSApiAccessToken has already been set" Condition="'$(RSApiAccessToken)'!=''"/>
+
+    <GetRSOAuthToken OAuthRefreshToken="$(RSAPIOAuth2RefreshToken)" Condition="'$(RSApiAccessToken)'==''">
+      <Output TaskParameter="OAuthAccessToken" PropertyName="RSApiAccessToken"/>
+    </GetRSOAuthToken>
+    
+  </Target>
+
+  <Target Name="Launchserver" DependsOnTargets="InitRSApi">
+
+    <LaunchRSServer OAuth2Token="$(RSApiAccessToken)"
+                    ROSPackageName="$(UploadBlobName)" 
+                    ROSPackageContainer="$(StorageContainerName)"
+                    ROSAccountID="$(StorageAccountName)"
+                    ROSAccountKey="$(StorageAccountKey)"
+                    ROSProviderName="Windows_Azure_Storage"/>
+    
+  </Target>
+
+</Project>

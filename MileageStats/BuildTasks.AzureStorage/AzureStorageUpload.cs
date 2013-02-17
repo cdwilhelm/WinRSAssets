@@ -42,7 +42,7 @@ namespace BuildTasks.AzureStorage
                 blockBlob.UploadFromStream(filestream);
                 retVal = true;
                 DateTime endtime = DateTime.Now;
-                Log.LogMessage("    AzureStorageUpload.Execute - Upload completed in " + endtime.Subtract(starttime).TotalSeconds.ToString());
+                Log.LogMessage("    AzureStorageUpload.Execute - Upload completed in " + endtime.Subtract(starttime).TotalSeconds.ToString() + " seconds");
             }
 
             Log.LogMessage("  AzureStorageUpload.Execute - complete at " + DateTime.Now.ToString());

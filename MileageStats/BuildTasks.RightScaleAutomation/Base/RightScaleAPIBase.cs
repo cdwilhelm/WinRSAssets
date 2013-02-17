@@ -29,12 +29,12 @@ namespace BuildTasks.RightScaleAutomation.Base
         /// <summary>
         /// ID of the cloud being queried where applicable
         /// </summary>
-        public Int64 CloudID { get; set; }
+        public string CloudID { get; set; }
 
         /// <summary>
         /// ID of the server to queried or acted upon where applicable
         /// </summary>
-        public Int64 ServerID { get; set; }
+        public string ServerID { get; set; }
 
 
         /// <summary>
@@ -94,9 +94,6 @@ namespace BuildTasks.RightScaleAutomation.Base
         /// <summary>
         /// Required input vaidation process for classes that inherit this base class--validation must be done per call as inputs vary
         /// </summary>
-        protected abstract void ValidateInputs()
-        {
-            throw new NotImplementedException("ValidateInputs call not implemented for the current MSBuild Task");
-        }
+        protected abstract void ValidateInputs();
     }
 }
