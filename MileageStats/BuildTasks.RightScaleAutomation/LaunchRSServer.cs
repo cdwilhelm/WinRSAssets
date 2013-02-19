@@ -45,7 +45,22 @@ namespace BuildTasks.RightScaleAutomation
         /// Provider name for storage account to be passed to the RightScript downloading and deploying the MSDeploy package 
         /// </summary>
         public string ROSProviderName { get; set; }
- 
+
+        /// <summary>
+        /// Property identiifes the SQL Server User to be used when building the ParameterSet XML file for MSDeploy
+        /// </summary>
+        public string ConnectionStringSQLUser { get; set; }
+
+        /// <summary>
+        /// Property identifies the Password for the SQL Server User to be used when building the ParameterSet XML file for MSDeploy
+        /// </summary>
+        public string ConnectionStringSQLPassword { get; set; }
+
+        /// <summary>
+        /// Property identifies the server hosting SQL Server to be used when building the ParameterSet XML file for MSDeploy
+        /// </summary>
+        public string ConnectionStringServer { get; set; }
+
         #endregion
 
         #region Internal objects and static values
