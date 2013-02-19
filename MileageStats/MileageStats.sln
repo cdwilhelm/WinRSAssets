@@ -42,6 +42,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BuildTasks.RightScaleAutoma
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "testHarnessApp", "testHarnessApp\testHarnessApp.csproj", "{47C63721-E975-4ACC-8DBA-47321C86942F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_RightScripts", "_RightScripts", "{2829D28C-5EA0-4F86-A931-B4222FD191BD}"
+	ProjectSection(SolutionItems) = preProject
+		IISInstallation.ps1 = IISInstallation.ps1
+		MSDeployScript.ps1 = MSDeployScript.ps1
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = MileageStats.vsmdi

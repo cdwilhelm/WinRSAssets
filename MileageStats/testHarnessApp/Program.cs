@@ -10,15 +10,13 @@ namespace testHarnessApp
     {
         static void Main(string[] args)
         {
-            GetRSOAuthToken oauthtoken = new GetRSOAuthToken();
-            oauthtoken.OAuthRefreshToken = "tokengoeshere";
-            oauthtoken.Execute();
+            Dictionary<string, object> contentObject = new Dictionary<string, object>();
+            Dictionary<string, object> inputObject = new Dictionary<string, object>();
+            inputObject.Add("input1", "value1");
+            inputObject.Add("input2", "value2");
+            contentObject.Add("inputs", contentObject);
 
-            LaunchRSServer lrss = new LaunchRSServer();
-
-            lrss.ServerID = 703265001;
-            lrss.OAuth2Token = "tokengoeshere";
-            lrss.Execute();
+            string jsonTest = BuildTasks.RightScaleAutomation.Base.DynamicJsonSerializer.Serialize(contentObject);
         }
     }
 }

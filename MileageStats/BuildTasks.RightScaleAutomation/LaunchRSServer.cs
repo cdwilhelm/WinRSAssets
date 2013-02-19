@@ -90,6 +90,15 @@ namespace BuildTasks.RightScaleAutomation
             return retVal;
         }
 
+        protected Dictionary<string, Dictionary<string, string>> buildInuputs()
+        {
+            Dictionary<string, Dictionary<string, string>> retVal = new Dictionary<string, Dictionary<string, string>>();
+
+
+
+            return retVal;
+        }
+
         /// <summary>
         /// Implementing Input validation process for this MSBuild task to ensure ServerID is populated
         /// </summary>
@@ -112,6 +121,28 @@ namespace BuildTasks.RightScaleAutomation
             {
                 Log.LogMessage(@"  GetInstanceInfo.ValidateInputs - inputs validated - ServerID (" + this.ServerID.ToString() + @")");
             }
+        }
+
+        /// <summary>
+        /// Private method builds out post data for call to API including inputs
+        /// </summary>
+        /// <returns>byte array for data to be pushed to the RestClient object</returns>
+        private byte[] buildPostData(Dictionary<string, Dictionary<string, string>> parameterCollection)
+        {
+            byte[] retVal;
+            string postData = string.Empty;
+
+            foreach (string outerCollectionKey in parameterCollection.Keys)
+            {
+                foreach (string innerCollectionKey in parameterCollection[outerCollectionKey].Keys)
+                {
+                    postData += outerCollectionKey + "[" + innerCollectionKey + @"]=""" + parameterCollection[outerCollectionKey][innerCollectionKey] + @"""&";
+                }
+            }
+
+            postData = postData.TrimEnd('&');
+
+            return System.Text.Encoding.UTF8.GetBytes(postData);
         }
     }
 }

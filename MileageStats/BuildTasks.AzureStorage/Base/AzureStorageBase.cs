@@ -53,6 +53,11 @@ namespace BuildTasks.AzureStorage.Base
         /// </summary>
         public bool UseDevelopmentStorage { get; set; }
 
+        /// <summary>
+        /// Flag indicates whether the task is in debug mode and is used to output security-sensitive information such as connection strings and credentials to the console for debug work
+        /// </summary>
+        public bool DebugMode { get; set; }
+
         #endregion
 
         /// <summary>
@@ -62,6 +67,7 @@ namespace BuildTasks.AzureStorage.Base
         {
             this.DefaultEndpointsProtocol = "https";
             this.UseDevelopmentStorage = false;
+            this.DebugMode = false;
         }
 
         /// <summary>

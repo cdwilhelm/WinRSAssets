@@ -20,9 +20,10 @@
     
   </Target>
 
-  <Target Name="Launchserver" DependsOnTargets="InitRSApi">
+  <Target Name="LaunchDevTestServer" DependsOnTargets="InitRSApi">
 
     <LaunchRSServer OAuth2Token="$(RSApiAccessToken)"
+                    ServerID="$(RSDevTestServerID)"
                     ROSPackageName="$(UploadBlobName)" 
                     ROSPackageContainer="$(StorageContainerName)"
                     ROSAccountID="$(StorageAccountName)"

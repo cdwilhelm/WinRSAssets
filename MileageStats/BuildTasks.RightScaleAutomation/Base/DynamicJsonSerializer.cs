@@ -22,16 +22,5 @@ namespace BuildTasks.RightScaleAutomation.Base
         {
             return JsonConvert.DeserializeObject<dynamic>(content);
         }
-
-        /// <summary>
-        /// Method uses the Newtonsoft.Json library to serialize a Json string from an object passed in 
-        /// </summary>
-        /// <param name="content"><typeparamref name="IDictionary"/> of string, object to be serialized</param>
-        /// <returns>Json string representation of the object passed in via <paramref name="content"/></returns>
-        public static string Serialize(Dictionary<string, object> content)
-        {
-            return JsonConvert.SerializeObject(content, Formatting.Indented, new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All, TypeNameAssemblyFormat = System.Runtime.Serialization.Formatters.FormatterAssemblyStyle.Simple });
-        }
-
     }
 }

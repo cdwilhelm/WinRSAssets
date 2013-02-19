@@ -11,7 +11,7 @@ This repo contains demo material and code samples for building out a cloud-enabl
   
 The rest of the work is contained within the BuildScripts and BuildTasks groupings of solutions.  The BuildScripts project is a collection of MSBuild Project files architected to be flexible and meaningfully useful across a variety of environments and setups.  The BuildTasks projects are individiual sets of BuildTasks developed to make use of specific workflows and processes and are leveraged within the BuildScripts project to manage the process of compiling, packaging, uploading and deploying a web application to a Windows Azure Virtual Machine.  
 
-This process has been tested with Microsoft Team Foundation Server 2012 and requires that MSDeploy v3 be installed on the server running the build agent--this can be done via the Microsoft Web Platform Installer (V4.0).  
+This process has been tested with Microsoft Team Foundation Server 2012 and requires that MSDeploy v3 be installed on the server running the build agent--this can be done via the Microsoft Web Platform Installer (V4.0).  I also used PowerGUI 3.2 (http://www.powergui.org/entry.jspa?externalID=3891&categoryID=299) and the PowerGUI Visual Studio Extensions (http://powerguivsx.codeplex.com/) to get all of my assets in one place (PS for RightScripts, MSBuild + custom tasks and the web app itself).
 
 Licensing Microsoft's code related to Project Silk and the MileageStats application is located at $gitroot/WinRSAssets/MileageStats/MileageStats.Web/license.txt
 

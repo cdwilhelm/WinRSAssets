@@ -29,7 +29,10 @@ namespace BuildTasks.AzureStorage
             Log.LogMessage("  AzureStorageUpload.Execute - beginning at " + DateTime.Now.ToString());
             bool retVal = false;
             string connectionString = GetStorageConnectionString();
-            Log.LogMessage("Connection string is: " + connectionString);
+            if (this.DebugMode)
+            {
+                Log.LogMessage("Connection string is: " + connectionString);
+            }
             CloudStorageAccount storageAccount = CloudStorageAccount.Parse(connectionString);
             Log.LogMessage("    AzureStorageUpload.Execute - Connection string is valid");
             CloudBlobClient blobClient = storageAccount.CreateCloudBlobClient();

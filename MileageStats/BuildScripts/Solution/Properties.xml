@@ -17,7 +17,7 @@
     <BuildArchitecture Condition="'$(BuildArchitecture)'==''"></BuildArchitecture>
     <PackageName Condition="'$(PackageName)'==''">BuildPackage.zip</PackageName>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <SolutionsToBuild Include="$(SolutionRoot)/MileageStats.sln"/>
   </ItemGroup>
