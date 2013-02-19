@@ -106,3 +106,9 @@ catch
 	Write-Host $_.Exception.StackTrace
 	exit 1
 }
+
+if(Test-Path $workingDirectory)
+{
+    Write-host "Removing working folder $workingDirectory"
+	Remove-Item -Recurse -Force $workingDirectory
+}

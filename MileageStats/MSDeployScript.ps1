@@ -146,6 +146,8 @@ try
 	$parameterFileContent = $env:MSDEPLOY_PARAMETERFILECONTENT
 	$parameterFileContentIsBase64Encoded = $env:MSDEPLOY_PARAMETERFILECONTENTISBASE64
 
+	Write-Host "Parsing out parameters file name as well as application name"
+
 	cd "$working_path"
 	$gciSearchPath = "*.SetParameters.xml"
 	$parameterFileName = (gci $gciSearchPath).Name
@@ -156,10 +158,12 @@ try
 	{
 		if($parameterFleContentIsBase64Encoded -eq $TRUE)
 		{
+			Write-Host "Decoding Parameter File Content from Base64 input"
 			$parameterXML = ConvertFrom-Base64($parameterFileContent)
 		}
 		else
 		{
+			Write-Host "Parameter file content does not require decoding"
 			$parameterXML = $parameterFileContent
 		}
 		
@@ -168,24 +172,28 @@ try
 	
 	
 	$fullPropXMLPath = Join-Path $working_path $parameterFileName
-	Write-Host "FullPropXMLPath is $fullPropXMLPath"
-	gc $fullPropXMLPath
+	
 	$xmlDoc = [XML](gc "$fullPropXMLPath")
+	
 	$xmlNode = $xmlDoc.parameters.setParameter | where {$_.name -eq "IIS Web Application Name"}
 	
 	if(!$env:MSDEPLOY_SITE_NAME)
 	{
+		Write-Host "Setting IIS Site Name to $env:MSDEPLOY_SITE_NAME"
 		$xmlNode.value = $env:MSDEPLOY_SITE_NAME
 	}
 	else
 	{
+		Write-Host "Setting IIS Site Name to Default Web Site"
 		$xmlNode.value = "Default Web Site"
 	}
 	
+	Write-Host "Save SetProperties xml file for Web Deploy process"
 	$xmlDoc.Save($fullPropXMLPath)
 	
 	#update web app name to put it in the default site:
 	Write-Host "Deploy Command is: $deployCmd"
+	Write-Host "Executing Web Deploy process via packaged batch file"
 	Invoke-Expression """$deployCmd"""
 }
 catch

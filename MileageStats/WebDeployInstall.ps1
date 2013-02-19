@@ -49,10 +49,10 @@ try
 	$webclient.DownloadFile($downloadUrl, $storageFile)
     Write-Host "Done downloading web deploy msi"
 	
-    Write-Host "Beginning installation"
+    Write-Host "Beginning installation of Web Deploy 3.0"
 	$msiExecCmd = "msiexec /i $storageFile ADDLOCAL=ALL /qn /norestart"
     cmd.exe /c """$msiExecCmd"""
-    Write-Host "Installation complete"
+    Write-Host "Installation of Web Deploy 3.0 complete"
 }
 catch
 {
