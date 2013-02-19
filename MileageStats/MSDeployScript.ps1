@@ -28,7 +28,6 @@ try
     }
     
     # Check inputs
-    $svn_app_path = $env:SVN_APP_PATH
     $zip_url = $env:ZIP_URL
     $StorageConteinerName = $env:REMOTE_STORAGE_CONTAINER_APP
     $StorageType = $env:REMOTE_STORAGE_ACCOUNT_PROVIDER_APP
@@ -106,8 +105,8 @@ try
           }
         }
       }
-    
-      cd "$dest_path"
+  
+      cd "$working_path"
       &"$s7z_cmd" x web.zip -y 
     
       Remove-Item "$web_zip"
@@ -128,18 +127,15 @@ try
         RosGetObject $rosCtx $zipName $fullPath
 
         Write-Host "Unzipping ${fullPath}..."
-        cd "$dest_path"
+        cd "$working_path"
         &"$s7z_cmd" x "$zipName" -y 
 
        # Write-Host "Removing ${fullPath}..."
        Remove-Item $fullPath
     }
-    else
-    {
-        throw "Location of the application package is not specified. Please check the inputs and try again."
-    }
+    
 
-    Write-Host "Application package downloaded succssfully to '$dest_path'"
+    Write-Host "Application package downloaded succssfully to '$working_path'"
 
     #start msdeploy workflow
 
@@ -150,11 +146,11 @@ try
 	$parameterFileContent = $env:MSDEPLOY_PARAMETERFILECONTENT
 	$parameterFileContentIsBase64Encoded = $env:MSDEPLOY_PARAMETERFILECONTENTISBASE64
 
-	cd $dest_path
-	
-	$parameterFileName = (gci *.SetParameters.xml).Name
-	$applicationName = $parameterFileName.Replace(".SetParameters.xml","")
-	$deployCmd = $applicationName + ".deploy.cmd /T"
+	cd "$working_path"
+	$gciSearchPath = "*.SetParameters.xml"
+	$parameterFileName = (gci $gciSearchPath).Name
+	$applicationName = $parameterFileName.Replace(".SetParameters.xml","").Replace($working_path, "")
+	$deployCmd = $working_path + "/" + $applicationName + ".deploy.cmd /T"
 	
 	if($parameterFileContent)
 	{
@@ -166,14 +162,16 @@ try
 		{
 			$parameterXML = $parameterFileContent
 		}
+		
+		echo $parameterXML | out-file -encoding 'ASCII' "$parameterFileName"
 	}
 	
-	echo $parameterXML | out-file -encoding 'ASCII' "$parameterFileName"
 	
 	$fullPropXMLPath = Join-Path $working_path $parameterFileName
-	
-	$xmlDoc = [XML](gc $fullPropXMLPath)
-	$xmlNode = $xmlDoc.Parameters.setParameter | where {$_.name -eq "IIS Web Applciation Name"}
+	Write-Host "FullPropXMLPath is $fullPropXMLPath"
+	gc $fullPropXMLPath
+	$xmlDoc = [XML](gc "$fullPropXMLPath")
+	$xmlNode = $xmlDoc.parameters.setParameter | where {$_.name -eq "IIS Web Application Name"}
 	
 	if(!$env:MSDEPLOY_SITE_NAME)
 	{
@@ -187,8 +185,8 @@ try
 	$xmlDoc.Save($fullPropXMLPath)
 	
 	#update web app name to put it in the default site:
-
-	& $deployCmd
+	Write-Host "Deploy Command is: $deployCmd"
+	Invoke-Expression """$deployCmd"""
 }
 catch
 {

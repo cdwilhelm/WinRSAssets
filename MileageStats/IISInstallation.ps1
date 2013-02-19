@@ -13,8 +13,12 @@ $rsLibDstDirPath = "$env:rs_sandbox_home\RightScript\lib"
 try
 {
 	Import-Module ServerManager 
-
-	Add-WindowsFeature -Name Web-Common-Http,Web-Asp-Net,Web-Net-Ext,Web-ISAPI-Ext,Web-ISAPI-Filter,Web-Http-Logging,Web-Request-Monitor,Web-Basic-Auth,Web-Windows-Auth,Web-Filtering,Web-Performance,Web-Mgmt-Console,Web-Mgmt-Compat,RSAT-Web-Server,WAS -IncludeAllSubFeature
+	
+	Add-WindowsFeature -Name Application-Server,AS-NET-Framework,AS-Web-Support,AS-WAS-Support,AS-HTTP-Activation,Web-Server,Web-WebServer,Web-Common-Http,Web-Static-Content,Web-Default-Doc,Web-Dir-Browsing,Web-Http-Errors,Web-Http-Redirect,Web-App-Dev,Web-Asp-Net,Web-Net-Ext,Web-ISAPI-Ext,Web-ISAPI-Filter,Web-Health,Web-Http-Logging,Web-Log-Libraries,Web-Request-Monitor,Web-Http-Tracing,Web-Security,Web-Basic-Auth,Web-Windows-Auth,Web-Digest-Auth,Web-Client-Auth,Web-Cert-Auth,Web-Url-Auth,Web-Filtering,Web-IP-Security,Web-Performance,Web-Stat-Compression,Web-Dyn-Compression,Web-Mgmt-Tools,Web-Mgmt-Console,Web-Scripting-Tools,Web-Mgmt-Service,WAS,WAS-Process-Model,WAS-NET-Environment,WAS-Config-APIs,WSRM  -IncludeAllSubFeature
+	
+	$iisRegScript = "C:\windows\Microsoft.NET\framework\v4.0.30319\aspnet_regiis.exe -i"
+	
+	cmd.exe /c """$iisRegScript"""
 }
 catch
 {

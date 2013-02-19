@@ -46,6 +46,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_RightScripts", "_RightScri
 	ProjectSection(SolutionItems) = preProject
 		IISInstallation.ps1 = IISInstallation.ps1
 		MSDeployScript.ps1 = MSDeployScript.ps1
+		WebDeployInstall.ps1 = WebDeployInstall.ps1
+		WebPlatformInstallerNoRestart.ps1 = WebPlatformInstallerNoRestart.ps1
 	EndProjectSection
 EndProject
 Global
