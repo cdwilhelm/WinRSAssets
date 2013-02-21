@@ -3,7 +3,7 @@
 $deploymentName = "Deployment for API Sandbox"
 $deploymentDescription = "Sandbox for Miscellaneous API Tests"
 
-$postString = "deployment[name]=""$deploymentName""&deployment[description]=""$deploymentDescription"""
+$postString = "deployment[name]=""$deploymentName""&deployment[description]=$deploymentDescription"
 $postBytes = [System.Text.Encoding]::UTF8.GetBytes($postString)
 
 $createDeploymentRequest = [System.Net.WebRequest]::Create("https://my.rightscale.com/api/deployments.xml")
