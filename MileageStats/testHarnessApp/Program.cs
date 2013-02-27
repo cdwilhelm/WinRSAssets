@@ -16,7 +16,7 @@ namespace testHarnessApp
             inputObject.Add("input2", "value2");
             contentObject.Add("inputs", contentObject);
 
-            string jsonTest = BuildTasks.RightScaleAutomation.Base.DynamicJsonSerializer.Serialize(contentObject);
+        
         }
     }
 }

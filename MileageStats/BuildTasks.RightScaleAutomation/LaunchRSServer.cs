@@ -89,11 +89,11 @@ namespace BuildTasks.RightScaleAutomation
         {
             bool retVal = false;
             ValidateInputs();
-            prepareCall();
-            
+            prepareRestCall();
+
             RestRequest request = new RestRequest(Method.POST);
             request.Resource = string.Format(this.MethodHref, ServerID.ToString());
-
+            
             RestResponse response = (RestResponse)restClient.Post(request);
 
             if (response.StatusCode == System.Net.HttpStatusCode.Created) //looking for a 201 completed
@@ -105,13 +105,59 @@ namespace BuildTasks.RightScaleAutomation
             return retVal;
         }
 
+        /// <summary>
+        /// Protected method returns a formatted set of inputs in a collection to be put into the 
+        /// </summary>
+        /// <returns></returns>
         protected Dictionary<string, Dictionary<string, string>> buildInuputs()
         {
-            Dictionary<string, Dictionary<string, string>> retVal = new Dictionary<string, Dictionary<string, string>>();
+            Dictionary<string, Dictionary<string, string>> parameterSet = new Dictionary<string, Dictionary<string, string>>();
 
+            parameterSet.Add("inputs[]", new Dictionary<string, string>());
 
+            if (!string.IsNullOrWhiteSpace(this.ROSAccountID))
+            {
+                parameterSet["inputs[]"].Add("REMOTE_STORAGE_ACCOUNT_ID_APP", this.ROSAccountID);
+            }
 
-            return retVal;
+            if (!string.IsNullOrWhiteSpace(this.ROSAccountKey))
+            {
+                parameterSet["inputs[]"].Add("REMOTE_STORAGE_ACCOUNT_SECRET_APP", this.ROSAccountKey);
+            }
+
+            if (!string.IsNullOrWhiteSpace(this.ROSPackageContainer))
+            {
+                parameterSet["inputs[]"].Add("REMOTE_STORAGE_CONTAINER_APP", this.ROSPackageContainer);
+            }
+
+            if (!string.IsNullOrWhiteSpace(this.ROSPackageName))
+            {
+                parameterSet["inputs[]"].Add("ZIP_FILE_NAME", this.ROSPackageName);
+            }
+
+            if (!string.IsNullOrWhiteSpace(this.ROSProviderName))
+            {
+                parameterSet["inputs[]"].Add("REMOTE_STORAGE_ACCOUNT_PROVIDER_APP", this.ROSProviderName);
+            }
+
+            if (!string.IsNullOrWhiteSpace(this.ConnectionStringServer))
+            {
+                parameterSet["inputs[]"].Add("DB_REMOTE_SERVER_IP", this.ConnectionStringServer);
+            }
+
+            if (!string.IsNullOrWhiteSpace(this.ConnectionStringSQLPassword))
+            {
+                parameterSet["inputs[]"].Add("DB_REMOTE_SQL_PASSWORD", this.ConnectionStringSQLPassword);
+            }
+
+            if (!string.IsNullOrWhiteSpace(this.ConnectionStringSQLUser))
+            {
+                parameterSet["inputs[]"].Add("DB_REMOTE_SQL_LOGIN", this.ConnectionStringSQLUser);
+            }
+
+            Log.LogMessage("  Input set is built");
+
+            return parameterSet;
         }
 
         /// <summary>
@@ -138,27 +184,6 @@ namespace BuildTasks.RightScaleAutomation
             }
         }
 
-        /// <summary>
-        /// Private method builds out post data for call to API including inputs
-        /// </summary>
-        /// <returns>byte array for data to be pushed to the RestClient object</returns>
-        private byte[] buildPostData(Dictionary<string, Dictionary<string, string>> parameterCollection)
-        {
-            byte[] retVal;
-            string postData = string.Empty;
-
-            foreach (string outerCollectionKey in parameterCollection.Keys)
-            {
-                foreach (string innerCollectionKey in parameterCollection[outerCollectionKey].Keys)
-                {
-                    postData += outerCollectionKey + "[" + innerCollectionKey + @"]=""" + parameterCollection[outerCollectionKey][innerCollectionKey] + @"""&";
-                }
-            }
-
-            postData = postData.TrimEnd('&');
-
-            return System.Text.Encoding.UTF8.GetBytes(postData);
-        }
     }
 }
 

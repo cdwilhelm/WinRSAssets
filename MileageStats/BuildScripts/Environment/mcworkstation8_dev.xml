@@ -6,6 +6,8 @@
 
   <PropertyGroup>
     <BuildID>AwesomeBuild123</BuildID>
+    <RSDevTestServerID>717118001</RSDevTestServerID>
+    <RSDevTestCloudID>2178</RSDevTestCloudID>
     <PackageLocation>d:\publish\msbuild\$(PackageName)_$(Date:yyyyMMdd)</PackageLocation>
     <SolutionRoot>D:\dev\patrickmcclory.github.com\WinRSAssets\MileageStats\</SolutionRoot>
   </PropertyGroup>

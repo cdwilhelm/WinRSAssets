@@ -5,6 +5,7 @@ using System.Text;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 using RestSharp;
+using System.Net;
 
 namespace BuildTasks.RightScaleAutomation.Base
 {
@@ -61,6 +62,8 @@ namespace BuildTasks.RightScaleAutomation.Base
         /// </summary>
         protected RestClient restClient;
 
+        protected WebClient httpClient;
+
         /// <summary>
         /// HTTP Header name for identifying which version of the API is being accessed
         /// </summary>
@@ -78,12 +81,13 @@ namespace BuildTasks.RightScaleAutomation.Base
             this.ApiHeaderValue = "1.5"; //default is API 1.5
             
             restClient = new RestClient(); //initialize restclient so we can persist values if necessary 
+            httpClient = new WebClient(); //initialize web client so we can use it along side restClient for POST 
         }
 
         /// <summary>
         /// PrepareCall method sets up proper http headers for the restClient object
         /// </summary>
-        internal void prepareCall()
+        internal void prepareRestCall()
         {
             restClient.BaseUrl = this.BaseUri; //initialize baseurl from inputs--is also set in constructor so that a default is present in the event that a value is not passed in
             restClient.Timeout = ApiClientTimeout * 1000; //timeout is in milliseconds
@@ -91,9 +95,73 @@ namespace BuildTasks.RightScaleAutomation.Base
             restClient.AddDefaultHeader(ApiHeaderName, ApiHeaderValue);
         }
 
+        internal void prepareHttpCall()
+        {
+            if (httpClient.Headers["Authorization"] == null)
+            {
+                httpClient.Headers.Add("Authorization", "Bearer " + this.OAuth2Token);
+            }
+            if (httpClient.Headers[ApiHeaderName] == null)
+            {
+                httpClient.Headers.Add(ApiHeaderName, ApiHeaderValue);
+            }
+        }
+
         /// <summary>
         /// Required input vaidation process for classes that inherit this base class--validation must be done per call as inputs vary
         /// </summary>
         protected abstract void ValidateInputs();
+
+
+        /// <summary>
+        /// Private method builds out put data for call to API including inputs
+        /// </summary>
+        /// <returns>string for data to be pushed to the RestClient object</returns>
+        protected string buildPutData(Dictionary<string, object> parameterCollection)
+        {
+            string putData = GetDataString(parameterCollection);
+            Log.LogMessage("  Put Data is: " + putData);
+            return putData;
+        }
+
+        /// <summary>
+        /// Private method builds out post data for call to API including inputs
+        /// </summary>
+        /// <returns>byte array for data to be pushed to the RestClient object</returns>
+        protected byte[] buildPostData(Dictionary<string, object> parameterCollection)
+        {
+            string postData = GetDataString(parameterCollection);
+            Log.LogMessage("  Post Data is: " + postData);
+            return Encoding.UTF8.GetBytes(postData);
+        }
+
+        /// <summary>
+        /// Private static method to take Dictionary of inputs and convert to string to be pushed to API/URL
+        /// </summary>
+        /// <param name="parameterCollection"></param>
+        /// <returns>string in URL formatted setup</returns>
+        private static string GetDataString(Dictionary<string, object> parameterCollection)
+        {
+            string postData = string.Empty;
+
+            foreach (string outerCollectionKey in parameterCollection.Keys)
+            {
+                if (parameterCollection[outerCollectionKey].GetType() == typeof(Dictionary<string, string>))
+                {
+                    foreach (string innerCollectionKey in ((Dictionary<string, string>)parameterCollection[outerCollectionKey]).Keys)
+                    {
+                        postData += outerCollectionKey + @"[name]=" + innerCollectionKey + @"&";
+                        postData += outerCollectionKey + @"[value]=" + ((Dictionary<string, string>)parameterCollection[outerCollectionKey])[innerCollectionKey] + @"&";
+                    }
+                }
+                else 
+                {
+                    postData += outerCollectionKey + @"=" + parameterCollection[outerCollectionKey].ToString();
+                }
+            }
+
+            postData = postData.TrimEnd('&');
+            return postData;
+        }
     }
 }

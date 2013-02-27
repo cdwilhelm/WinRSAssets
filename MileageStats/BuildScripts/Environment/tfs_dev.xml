@@ -4,6 +4,16 @@
   <PropertyGroup>
     <PackageLocation>\\192.168.1.6\Builds\Publish</PackageLocation>
     <SolutionRoot>$(MSBuildProjectDirectory)\..\</SolutionRoot>
+    <RSDevTestServerID>717032001</RSDevTestServerID>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StorageAccountName>pmdevusweststorageacct</StorageAccountName>
+    <StorageAccountKey>GZdqJ+eq2JpifMvN1gVrAPYWnizjGHtbY0DB16vFBzKCmE5WWFPL6v+U9X426ulF1CcSYMiYINLKIdWPZRbptQ==</StorageAccountKey>
+    <StorageContainerName>media</StorageContainerName>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <RSAPIOAuth2RefreshToken>ea7984a2a23db8b491a9c837d720fb56a7736e3e</RSAPIOAuth2RefreshToken>
   </PropertyGroup>
   
 </Project>  

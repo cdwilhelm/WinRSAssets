@@ -4,11 +4,14 @@
          xsi:schemaLocation="http://schemas.microsoft.com/developer/msbuild/2003	..\Schemas\Microsoft.Build.xsd">
 
   <UsingTask
-    AssemblyFile="$(TasksRootFolder)\Build.RightScaleAutomation\BuildTasks.RightScaleAutomation.dll"
+    AssemblyFile="$(TasksRootFolder)Build.RightScaleAutomation\BuildTasks.RightScaleAutomation.dll"
     TaskName="GetRSOAuthToken" />
   <UsingTask
-    AssemblyFile="$(TasksRootFolder)\Build.RightScaleAutomation\BuildTasks.RightScaleAutomation.dll"
+    AssemblyFile="$(TasksRootFolder)Build.RightScaleAutomation\BuildTasks.RightScaleAutomation.dll"
     TaskName="LaunchRSServer" />
+  <UsingTask
+    AssemblyFile="$(TasksRootFolder)Build.RightScaleAutomation\BuildTasks.RightScaleAutomation.dll"
+    TaskName="RefreshApplication" />
   
   <Target Name="InitRSApi">
 
@@ -24,7 +27,21 @@
 
     <LaunchRSServer OAuth2Token="$(RSApiAccessToken)"
                     ServerID="$(RSDevTestServerID)"
+                    CloudID="$(RSDevTestCloudID)"
                     ROSPackageName="$(UploadBlobName)" 
+                    ROSPackageContainer="$(StorageContainerName)"
+                    ROSAccountID="$(StorageAccountName)"
+                    ROSAccountKey="$(StorageAccountKey)"
+                    ROSProviderName="Windows_Azure_Storage"/>
+    
+  </Target>
+
+  <Target Name="UpdateCITestServer" DependsOnTargets="InitRSApi">
+    
+    <RefreshApplication OAuth2Token="$(RSApiAccessToken)"
+                    ServerID="$(RSDevTestServerID)"
+                    CloudID="$(RSDevTestCloudID)" 
+                    ROSPackageName="$(UploadBlobName)"
                     ROSPackageContainer="$(StorageContainerName)"
                     ROSAccountID="$(StorageAccountName)"
                     ROSAccountKey="$(StorageAccountKey)"

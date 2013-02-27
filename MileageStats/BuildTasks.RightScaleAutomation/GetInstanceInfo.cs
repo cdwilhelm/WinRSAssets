@@ -83,7 +83,7 @@ namespace BuildTasks.RightScaleAutomation
             bool retVal = false;
             Log.LogMessage("  GetInstanceInfo.Execute - beginning at " + DateTime.Now.ToString());
             ValidateInputs();
-            prepareCall();
+            prepareRestCall();
             RestRequest request = new RestRequest(Method.GET);
             request.Resource = string.Format(this.MethodHref, this.CloudID.ToString(), this.ServerID.ToString());
             Log.LogMessage("  GetInstanceInfo.Execute - making call to restClient");

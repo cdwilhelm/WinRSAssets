@@ -11,14 +11,10 @@
     <AssemblyName>BuildScripts</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <SccProjectName>
-    </SccProjectName>
-    <SccLocalPath>
-    </SccLocalPath>
-    <SccAuxPath>
-    </SccAuxPath>
-    <SccProvider>
-    </SccProvider>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -73,6 +69,8 @@
     <Content Include="Tasks\Build.RightScaleAutomation\Newtonsoft.Json.xml" />
     <Content Include="Tasks\Build.RightScaleAutomation\RestSharp.dll" />
     <Content Include="Tasks\Build.RightScaleAutomation\RestSharp.xml" />
+    <Content Include="Tasks\Build.Utility\BuildTasks.Utility.dll" />
+    <Content Include="Tasks\Build.Utility\BuildTasks.Utility.pdb" />
     <Content Include="Tasks\BuildExtensionPack\3.5.12.0\Interop.COMAdmin.dll" />
     <Content Include="Tasks\BuildExtensionPack\3.5.12.0\Interop.IWshRuntimeLibrary.dll" />
     <Content Include="Tasks\BuildExtensionPack\3.5.12.0\Ionic.Zip.dll" />
@@ -142,9 +140,7 @@
     <None Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.tasks" />
     <None Include="Tasks\BuildExtensionPack\4.0.6.0\MSBuild.ExtensionPack.VersionNumber.targets" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Tasks\Build.Utility\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
