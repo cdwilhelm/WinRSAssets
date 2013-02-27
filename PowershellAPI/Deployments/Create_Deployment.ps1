@@ -19,7 +19,9 @@ $createDeploymentRequestStream.Close()
 [System.Net.WebResponse] $createDeploymentResponse = $createDeploymentRequest.GetResponse()
 $createDeploymentResponseStream = $createDeploymentResponse.GetResponseStream()
 $createDeploymentResponseStreamReader = New-Object System.IO.StreamReader -argumentList $createDeploymentResponseStream
-[string]$createDeploymentResponseString = $createDeploymentResponseStreamReader.ReadToEnd()
+[string]$createDeploymentResponseString = $createDeploymentResponseStreamReader.ReadToEnd
+
+$createDeploymentResponse
 
 #Response:
 #
