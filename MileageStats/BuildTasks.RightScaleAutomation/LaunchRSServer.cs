@@ -5,15 +5,21 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using RestSharp;
+using RightScale.netClient;
 
 namespace BuildTasks.RightScaleAutomation
 {
     /// <summary>
     /// MSBuild task to launch a RightScale server based on a server ID from the RS Dashboard.
     /// </summary>
-    public class LaunchRSServer : Base.RightScaleAPIBase
+    public class LaunchRSServer : Base.RightScaleBuildTaskBase
     {
+        /// <summary>
+        /// ID of the server to launch
+        /// </summary>
+        [Required]
+        public string ServerID { get; set; }
+
         #region Optional Input Parameters
         // These are mostly optional because they can be set at the server or deployment level within the RightScale platform--it may not be necessary to pass these in all the time, but it's certainly available if need be.
    
@@ -77,7 +83,6 @@ namespace BuildTasks.RightScaleAutomation
         /// </summary>
         public LaunchRSServer()
         {
-            this.MethodHref = "/servers/{0}/launch";
             this.ROSProviderName = "Windows_Azure_Storage";  //TODO: validate that this is the right string for the RightScript accessing WAZ Storage
         }
 
@@ -89,16 +94,10 @@ namespace BuildTasks.RightScaleAutomation
         {
             bool retVal = false;
             ValidateInputs();
-            prepareRestCall();
 
-            RestRequest request = new RestRequest(Method.POST);
-            request.Resource = string.Format(this.MethodHref, ServerID.ToString());
-            
-            RestResponse response = (RestResponse)restClient.Post(request);
-
-            if (response.StatusCode == System.Net.HttpStatusCode.Created) //looking for a 201 completed
+            if (base.authenticateClient())
             {
-                retVal = true;
+                return RightScale.netClient.Server.launch(this.ServerID, buildInputs());
             }
 
             Log.LogMessage("  LaunchRSServer.Execute - complete at " + DateTime.Now.ToString());
@@ -109,50 +108,48 @@ namespace BuildTasks.RightScaleAutomation
         /// Protected method returns a formatted set of inputs in a collection to be put into the 
         /// </summary>
         /// <returns></returns>
-        protected Dictionary<string, Dictionary<string, string>> buildInuputs()
+        protected List<KeyValuePair<string,string>> buildInputs()
         {
-            Dictionary<string, Dictionary<string, string>> parameterSet = new Dictionary<string, Dictionary<string, string>>();
-
-            parameterSet.Add("inputs[]", new Dictionary<string, string>());
-
+            List<KeyValuePair<string,string>> parameterSet = new List<KeyValuePair<string,string>>();
+           
             if (!string.IsNullOrWhiteSpace(this.ROSAccountID))
             {
-                parameterSet["inputs[]"].Add("REMOTE_STORAGE_ACCOUNT_ID_APP", this.ROSAccountID);
+                parameterSet.Add(new KeyValuePair<string,string>("REMOTE_STORAGE_ACCOUNT_ID_APP", this.ROSAccountID));
             }
 
             if (!string.IsNullOrWhiteSpace(this.ROSAccountKey))
             {
-                parameterSet["inputs[]"].Add("REMOTE_STORAGE_ACCOUNT_SECRET_APP", this.ROSAccountKey);
+                parameterSet.Add(new KeyValuePair<string,string>("REMOTE_STORAGE_ACCOUNT_SECRET_APP", this.ROSAccountKey));
             }
 
             if (!string.IsNullOrWhiteSpace(this.ROSPackageContainer))
             {
-                parameterSet["inputs[]"].Add("REMOTE_STORAGE_CONTAINER_APP", this.ROSPackageContainer);
+                parameterSet.Add(new KeyValuePair<string,string>("REMOTE_STORAGE_CONTAINER_APP", this.ROSPackageContainer));
             }
 
             if (!string.IsNullOrWhiteSpace(this.ROSPackageName))
             {
-                parameterSet["inputs[]"].Add("ZIP_FILE_NAME", this.ROSPackageName);
+                parameterSet.Add(new KeyValuePair<string,string>("ZIP_FILE_NAME", this.ROSPackageName));
             }
 
             if (!string.IsNullOrWhiteSpace(this.ROSProviderName))
             {
-                parameterSet["inputs[]"].Add("REMOTE_STORAGE_ACCOUNT_PROVIDER_APP", this.ROSProviderName);
+                parameterSet.Add(new KeyValuePair<string,string>("REMOTE_STORAGE_ACCOUNT_PROVIDER_APP", this.ROSProviderName));
             }
 
             if (!string.IsNullOrWhiteSpace(this.ConnectionStringServer))
             {
-                parameterSet["inputs[]"].Add("DB_REMOTE_SERVER_IP", this.ConnectionStringServer);
+                parameterSet.Add(new KeyValuePair<string,string>("DB_REMOTE_SERVER_IP", this.ConnectionStringServer));
             }
 
             if (!string.IsNullOrWhiteSpace(this.ConnectionStringSQLPassword))
             {
-                parameterSet["inputs[]"].Add("DB_REMOTE_SQL_PASSWORD", this.ConnectionStringSQLPassword);
+                parameterSet.Add(new KeyValuePair<string,string>("DB_REMOTE_SQL_PASSWORD", this.ConnectionStringSQLPassword));
             }
 
             if (!string.IsNullOrWhiteSpace(this.ConnectionStringSQLUser))
             {
-                parameterSet["inputs[]"].Add("DB_REMOTE_SQL_LOGIN", this.ConnectionStringSQLUser);
+                parameterSet.Add(new KeyValuePair<string,string>("DB_REMOTE_SQL_LOGIN", this.ConnectionStringSQLUser));
             }
 
             Log.LogMessage("  Input set is built");
