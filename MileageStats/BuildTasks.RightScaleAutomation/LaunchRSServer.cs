@@ -160,7 +160,7 @@ namespace BuildTasks.RightScaleAutomation
         /// <summary>
         /// Implementing Input validation process for this MSBuild task to ensure ServerID is populated
         /// </summary>
-        protected override void ValidateInputs()
+        protected void ValidateInputs()
         {
             string errorMessage = string.Empty;
             if(!this.validROSTypes.Contains<string>(this.ROSProviderName))
@@ -180,7 +180,6 @@ namespace BuildTasks.RightScaleAutomation
                 Log.LogMessage(@"  GetInstanceInfo.ValidateInputs - inputs validated - ServerID (" + this.ServerID.ToString() + @")");
             }
         }
-
     }
 }
 

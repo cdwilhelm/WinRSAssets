@@ -16,7 +16,7 @@
     
   </Target>
 
-  <Target Name="LocalCITest" DependsOnTargets="BuildWebPackage;UploadBlobPackage;UpdateCITestServer">
+  <Target Name="PublishCITest" DependsOnTargets="BuildWebPackage;UploadBlobPackage;UpdateCITestServer">
     
   </Target>
 

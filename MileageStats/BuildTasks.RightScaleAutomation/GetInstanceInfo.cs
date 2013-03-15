@@ -121,7 +121,7 @@ namespace BuildTasks.RightScaleAutomation
         /// <summary>
         /// Implementing Input validation process for this MSBuild task to ensure CloudID and ServerID are populated
         /// </summary>
-        protected override void ValidateInputs()
+        protected void ValidateInputs()
         {
             string errorMessage = string.Empty;
             if (string.IsNullOrWhiteSpace(this.ServerID))

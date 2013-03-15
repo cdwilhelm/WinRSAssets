@@ -12,7 +12,7 @@ namespace BuildTasks.RightScaleAutomation
     /// <summary>
     /// Build Task to refresh the application on a running server.
     /// </summary>
-    public class RefreshApplication : BuildTasks.RightScaleAutomation.Base.RightScaleBuildTaskBase
+    public class RefreshApplication : Base.RightScaleBuildTaskBase
     {
         #region Input Parameters
 
@@ -102,7 +102,7 @@ namespace BuildTasks.RightScaleAutomation
         /// <summary>
         /// method validates inputs and should be run within the execute() method for this task 
         /// </summary>
-        protected override void ValidateInputs()
+        protected void ValidateInputs()
         {
             string errorString = string.Empty;
 
@@ -129,15 +129,30 @@ namespace BuildTasks.RightScaleAutomation
             bool retVal = false;
             ValidateInputs();
 
-            RightScale.netClient.Server deployServer = RightScale.netClient.Server.show(this.ServerID);
-
-            List<KeyValuePair<string, string>> inputs = buildInputs();
-
-            List<RightScale.netClient.Task> tasks = deployServer.current_instance.multi_run_executable(deployServer.current_instance.cloud.ID, true, inputs, this.RecipeName, this.RightScriptID);
-
-            if (tasks.Count > 0)
+            if (RightScale.netClient.Core.APIClient.Instance.Authenticate(this.OAuthRefreshToken).Result)
             {
-                retVal = true;
+                RightScale.netClient.Server deployServer = RightScale.netClient.Server.show(this.ServerID);
+
+                if (deployServer == null)
+                {
+                    Log.LogError("deployServer object not found for server ID specified (" + this.ServerID + ").");
+                }
+
+                List<KeyValuePair<string, string>> inputs = buildInputs();
+                RightScale.netClient.Instance instance = deployServer.currentInstance;
+                if (instance != null)
+                {
+                    List<RightScale.netClient.Task> tasks = instance.multi_run_executable(instance.cloud.ID, true, inputs, this.RecipeName, this.RightScriptID);
+                    
+                    if (tasks.Count > 0)
+                    {
+                        retVal = true;
+                    }
+                }
+                else
+                {
+                    Log.LogError("There is no current instance to deploy to for server ID specified (" + this.ServerID + ").");
+                }
             }
 
             return retVal;

@@ -59,14 +59,6 @@ namespace BuildTasks.RightScaleAutomation
             this.PollingInterval = 30;
             this.InstanceSet = string.Empty;
         }
-
-        /// <summary>
-        /// Protected method validates that inputs are ok for execution
-        /// </summary>
-        protected override void ValidateInputs()
-        {
-            throw new NotImplementedException();
-        }
         
         /// <summary>
         /// Override of Task.Execute method to run wait process for waiting for instances to reach a desired state

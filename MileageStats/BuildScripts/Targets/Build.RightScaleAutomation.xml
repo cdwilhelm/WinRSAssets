@@ -12,40 +12,28 @@
   <UsingTask
     AssemblyFile="$(TasksRootFolder)Build.RightScaleAutomation\BuildTasks.RightScaleAutomation.dll"
     TaskName="RefreshApplication" />
-  
-  <Target Name="InitRSApi">
 
-    <Message Text="RSApiAccessToken has already been set" Condition="'$(RSApiAccessToken)'!=''"/>
+  <Target Name="LaunchDevTestServer">
 
-    <GetRSOAuthToken OAuthRefreshToken="$(RSAPIOAuth2RefreshToken)" Condition="'$(RSApiAccessToken)'==''">
-      <Output TaskParameter="OAuthAccessToken" PropertyName="RSApiAccessToken"/>
-    </GetRSOAuthToken>
-    
-  </Target>
-
-  <Target Name="LaunchDevTestServer" DependsOnTargets="InitRSApi">
-
-    <LaunchRSServer OAuth2Token="$(RSApiAccessToken)"
+    <LaunchRSServer OAuthRefreshToken="$(RSAPIOAuth2RefreshToken)"
                     ServerID="$(RSDevTestServerID)"
-                    CloudID="$(RSDevTestCloudID)"
                     ROSPackageName="$(UploadBlobName)" 
                     ROSPackageContainer="$(StorageContainerName)"
                     ROSAccountID="$(StorageAccountName)"
                     ROSAccountKey="$(StorageAccountKey)"
                     ROSProviderName="Windows_Azure_Storage"/>
-    
   </Target>
 
-  <Target Name="UpdateCITestServer" DependsOnTargets="InitRSApi">
-    
-    <RefreshApplication OAuth2Token="$(RSApiAccessToken)"
-                    ServerID="$(RSDevTestServerID)"
-                    CloudID="$(RSDevTestCloudID)" 
+  <Target Name="UpdateCITestServer">
+
+    <RefreshApplication OAuthRefreshToken="$(RSAPIOAuth2RefreshToken)"
+                    ServerID="$(RSCITestServerID)"
                     ROSPackageName="$(UploadBlobName)"
                     ROSPackageContainer="$(StorageContainerName)"
                     ROSAccountID="$(StorageAccountName)"
                     ROSAccountKey="$(StorageAccountKey)"
-                    ROSProviderName="Windows_Azure_Storage"/>
+                    ROSProviderName="Windows_Azure_Storage"
+                    RightScriptID="$(RedeployRightScriptID)"/>
     
   </Target>
 

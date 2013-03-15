@@ -45,8 +45,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="RightScale.netClient">
-      <HintPath>..\packages\RightScale.netClient.0.1.0-alpha\lib\net45\RightScale.netClient.dll</HintPath>
+    <Reference Include="RightScale.netClient, Version=0.1.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\RightScale.netClient.0.1.1-alpha\lib\net45\RightScale.netClient.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

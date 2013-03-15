@@ -60,5 +60,14 @@ namespace BuildTasks.RightScaleAutomation.Base
                 throw new RightScale.netClient.RightScaleAPIException("Failed to authenticate due to missing parameters.  OAuth refresh token or username/password/accountid are required"); //don't have enough info to actually perform an auth request
             }
         }
+
+        /// <summary>
+        /// Base implementation of Execute, must be overridden 
+        /// </summary>
+        /// <returns>Always throws a NotImplementedException</returns>
+        public override bool Execute()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
