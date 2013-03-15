@@ -102,7 +102,7 @@ namespace BuildTasks.RightScaleAutomation
         /// <summary>
         /// method validates inputs and should be run within the execute() method for this task 
         /// </summary>
-        private override void ValidateInputs()
+        protected override void ValidateInputs()
         {
             string errorString = string.Empty;
 
