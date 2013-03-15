@@ -45,9 +45,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.4.5.11\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="RestSharp">
-      <HintPath>..\packages\RestSharp.104.1\lib\net4\RestSharp.dll</HintPath>
-    </Reference>
     <Reference Include="RightScale.netClient">
       <HintPath>..\packages\RightScale.netClient.0.1.0-alpha\lib\net45\RightScale.netClient.dll</HintPath>
     </Reference>
@@ -65,7 +62,7 @@
     <Compile Include="Base\MSDeployUtility.cs" />
     <Compile Include="Base\RightScaleBuildTaskBase.cs" />
     <Compile Include="GetInstanceInfo.cs" />
-    <Compile Include="GetRSOAuthToken.cs" />
+    <Compile Include="AuthenticateRSAPI.cs" />
     <Compile Include="LaunchRSServer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RefreshApplication.cs" />

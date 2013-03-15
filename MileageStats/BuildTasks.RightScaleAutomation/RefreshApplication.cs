@@ -3,12 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Build.Framework;
+using Microsoft.Build.Utilities;
 using System.Net;
 
 namespace BuildTasks.RightScaleAutomation
 {
-    public class RefreshApplication : Base.RightScaleAPIBase
+    /// <summary>
+    /// Build Task to refresh the application on a running server.
+    /// </summary>
+    public class RefreshApplication : BuildTasks.RightScaleAutomation.Base.RightScaleBuildTaskBase
     {
+        #region Input Parameters
+
         /// <summary>
         /// Name of the Web package container to be used when deploying via MSDeploy on the server from Windows Azure Storage - used to point the RghtScale ServerTemplate to the proper place to download the packaged MSBuild artifact
         /// Values can either be in the form of "text:raw_value" or a pointer to an existing RightScale Credential "cred:existing_cred"
@@ -39,83 +46,99 @@ namespace BuildTasks.RightScaleAutomation
         public string ROSProviderName { get; set; }
 
         /// <summary>
+        /// ID of the server being updated
+        /// </summary>
+        [Required]
+        public string ServerID { get; set; }
+
+        /// <summary>
+        /// Name of the recipe to run
+        /// </summary>
+        public string RecipeName { get; set; }
+
+        /// <summary>
+        /// ID of the RightScript to run
+        /// </summary>
+        public string RightScriptID { get; set; }
+
+        #endregion
+
+        /// <summary>
         /// Protected method returns a formatted set of inputs in a collection to be put into the 
         /// </summary>
         /// <returns></returns>
-        protected Dictionary<string, object> buildInputs()
+        protected List<KeyValuePair<string, string>> buildInputs()
         {
-            Dictionary<string, object> parameterSet = new Dictionary<string, object>();
-
-            parameterSet.Add("inputs[]", new Dictionary<string, string>());
+            List<KeyValuePair<string, string>> parameterSet = new List<KeyValuePair<string, string>>();
 
             if (!string.IsNullOrWhiteSpace(this.ROSAccountID))
             {
-                ((Dictionary<string, string>)parameterSet["inputs[]"]).Add("REMOTE_STORAGE_ACCOUNT_ID_APP", "text:" + this.ROSAccountID);
+                parameterSet.Add(new KeyValuePair<string, string>("REMOTE_STORAGE_ACCOUNT_ID_APP", "text:" + this.ROSAccountID));
             }
 
             if (!string.IsNullOrWhiteSpace(this.ROSAccountKey))
             {
-                ((Dictionary<string, string>)parameterSet["inputs[]"]).Add("REMOTE_STORAGE_ACCOUNT_SECRET_APP", "text:" + this.ROSAccountKey);
+                parameterSet.Add(new KeyValuePair<string, string>("REMOTE_STORAGE_ACCOUNT_SECRET_APP", "text:" + this.ROSAccountKey));
             }
 
             if (!string.IsNullOrWhiteSpace(this.ROSPackageContainer))
             {
-                ((Dictionary<string, string>)parameterSet["inputs[]"]).Add("REMOTE_STORAGE_CONTAINER_APP", "text:" + this.ROSPackageContainer);
+                parameterSet.Add(new KeyValuePair<string, string>("REMOTE_STORAGE_CONTAINER_APP", "text:" + this.ROSPackageContainer));
             }
 
             if (!string.IsNullOrWhiteSpace(this.ROSPackageName))
             {
-                ((Dictionary<string, string>)parameterSet["inputs[]"]).Add("ZIP_FILE_NAME", "text:" + this.ROSPackageName);
+                parameterSet.Add(new KeyValuePair<string, string>("ZIP_FILE_NAME", "text:" + this.ROSPackageName));
             }
 
             if (!string.IsNullOrWhiteSpace(this.ROSProviderName))
             {
-                ((Dictionary<string, string>)parameterSet["inputs[]"]).Add("REMOTE_STORAGE_ACCOUNT_PROVIDER_APP", "text:" + this.ROSProviderName);
+                parameterSet.Add(new KeyValuePair<string, string>("REMOTE_STORAGE_ACCOUNT_PROVIDER_APP", "text:" + this.ROSProviderName));
             }
-
-            parameterSet.Add("right_script_href", "/api/right_scripts/425343001");
 
             return parameterSet;
         }
 
-        public RefreshApplication()
+        /// <summary>
+        /// method validates inputs and should be run within the execute() method for this task 
+        /// </summary>
+        private override void ValidateInputs()
         {
-            this.BaseUri = "https://my.rightscale.com/api/clouds/{0}/instances/{1}/run_executable";
+            string errorString = string.Empty;
+
+            if (string.IsNullOrWhiteSpace(this.RecipeName) && string.IsNullOrWhiteSpace(this.RightScriptID))
+            {
+                errorString += "RecipeName and RightScriptID cannot both be null or empty strings";
+            }
+            if (!string.IsNullOrWhiteSpace(this.RecipeName) && !string.IsNullOrWhiteSpace(this.RightScriptID))
+            {
+                errorString += "You cannot specify both a RecipeName and a RightScriptID.  Please only specify one of these inputs when executing the RefreshApplication Build Task.";
+            }
+            if (!string.IsNullOrWhiteSpace(errorString))
+            {
+                throw new ArgumentException(errorString);
+            }
         }
 
-        protected override void ValidateInputs()
-        {
-            throw new NotImplementedException();
-        }
-
+        /// <summary>
+        /// Override to Execute method refreshes the application as defined by inputs
+        /// </summary>
+        /// <returns>True if successful, false if not</returns>
         public override bool Execute()
         {
             bool retVal = false;
+            ValidateInputs();
 
-            byte[] postData = buildPostData(buildInputs());
-            Log.LogMessage(string.Format(this.BaseUri, this.CloudID, this.ServerID));
-            WebRequest request = WebRequest.Create(string.Format(this.BaseUri, this.CloudID, this.ServerID));
-            request.Method = "POST";
+            RightScale.netClient.Server deployServer = RightScale.netClient.Server.show(this.ServerID);
 
-            request.Headers.Add("X_API_VERSION", this.ApiHeaderValue);
-            request.Headers.Add("Authorization", "Bearer " + this.OAuth2Token);
+            List<KeyValuePair<string, string>> inputs = buildInputs();
 
-            using (var requestStream = request.GetRequestStream())
+            List<RightScale.netClient.Task> tasks = deployServer.current_instance.multi_run_executable(deployServer.current_instance.cloud.ID, true, inputs, this.RecipeName, this.RightScriptID);
+
+            if (tasks.Count > 0)
             {
-                requestStream.Write(postData, 0, postData.Length);
+                retVal = true;
             }
-
-            WebResponse response = request.GetResponse();
-            string streamContents = string.Empty;
-            using (var responseStream = response.GetResponseStream())
-            {
-                using (System.IO.StreamReader streamreader = new System.IO.StreamReader(responseStream))
-                {
-                    streamContents = streamreader.ReadToEnd();
-                }
-            }
-
-            
 
             return retVal;
         }

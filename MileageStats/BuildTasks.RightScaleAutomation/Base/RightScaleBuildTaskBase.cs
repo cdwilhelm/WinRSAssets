@@ -14,10 +14,19 @@ namespace BuildTasks.RightScaleAutomation.Base
         /// </summary>
         public string OAuthRefreshToken { get; set; }
 
+        /// <summary>
+        /// RightScale API user name
+        /// </summary>
         public string APIUserName { get; set; }
 
+        /// <summary>
+        /// RightScale API Password
+        /// </summary>
         public string APIPassword { get; set; }
 
+        /// <summary>
+        /// RightScale API Account number
+        /// </summary>
         public string APIAccountNo { get; set; }
 
         /// <summary>

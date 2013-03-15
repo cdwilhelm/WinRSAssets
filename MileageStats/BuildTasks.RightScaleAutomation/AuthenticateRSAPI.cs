@@ -44,6 +44,6 @@ namespace BuildTasks.RightScaleAutomation
 
             Log.LogMessage("  AuthenticateRSAPI.Execute - complete at " + DateTime.Now.ToString());
             return retVal;
-        }
+        }		
     }
 }

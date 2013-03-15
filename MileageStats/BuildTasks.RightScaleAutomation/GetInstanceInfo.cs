@@ -5,22 +5,25 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
-using RestSharp;
 
 namespace BuildTasks.RightScaleAutomation
 {
     /// <summary>
     /// MSBuild task to gather general information about a running instance within the RightScale system on a given cloud
     /// </summary>
-    public class GetInstanceInfo : Base.RightScaleAPIBase
+    public class GetInstanceInfo : Base.RightScaleBuildTaskBase
     {
-        #region Output Variables
+        #region Input Variables
 
         /// <summary>
         /// ID of the server to be queried
         /// </summary>
         [Required]
         public string ServerID { get; set; }
+
+        #endregion
+
+        #region Output Variables
 
         /// <summary>
         /// Collection of Private IP addresses assigned to the given instance
@@ -64,16 +67,26 @@ namespace BuildTasks.RightScaleAutomation
         [Output]
         public string State { get; set; }
 
-        #endregion
+        /// <summary>
+        /// OS Platform of the current Instance of this server
+        /// </summary>
+        [Output]
+        public string OSPlatform { get; set; }
 
         /// <summary>
-        /// Constructor initializes defaults variables that are not required inputs
+        /// Private DNS names of the current instance of this server
         /// </summary>
-        public GetInstanceInfo()
-        {
-            this.MethodHref = @"/api/clouds/{0}/instances/{1}";
-        }
+        [Output]
+        public List<string> PrivateDNSNames { get; set; }
 
+        /// <summary>
+        /// InstanceID of the currently instance of this server
+        /// </summary>
+        [Output]
+        public string InstanceID { get; set; }
+
+        #endregion
+        
         /// <summary>
         /// Override to Task.Execute to run custom process for gathering data on a server instance running within RightScale
         /// </summary>
@@ -83,15 +96,23 @@ namespace BuildTasks.RightScaleAutomation
             bool retVal = false;
             Log.LogMessage("  GetInstanceInfo.Execute - beginning at " + DateTime.Now.ToString());
             ValidateInputs();
-            prepareRestCall();
-            RestRequest request = new RestRequest(Method.GET);
-            request.Resource = string.Format(this.MethodHref, this.CloudID.ToString(), this.ServerID.ToString());
-            Log.LogMessage("  GetInstanceInfo.Execute - making call to restClient");
-            RestResponse response = (RestResponse)restClient.Post(request);
 
-            dynamic responseObject = Base.DynamicJsonSerializer.Deserialize<dynamic>(response.Content);
+            RightScale.netClient.Server server = RightScale.netClient.Server.show(this.ServerID, "instance_detail");
 
-            //TODO: finish implementing execute and parse data back out to output variables as necessary
+            if (server.current_instance != null)
+            {
+                RightScale.netClient.Instance currentInstance = server.current_instance;
+                this.PrivateIPAddresses = currentInstance.private_ip_addresses;
+                this.PublicIPAddresses = currentInstance.public_ip_addresses;
+                this.CreatedAt = currentInstance.created_at;
+                this.UpdatedAt = currentInstance.updated_at;
+                this.Name = currentInstance.name;
+                this.ResourceUid = currentInstance.resource_uid;
+                this.State = currentInstance.state;
+                this.OSPlatform = currentInstance.os_platform;
+                this.PrivateDNSNames = currentInstance.private_dns_names;
+                this.InstanceID = currentInstance.ID;
+            }
 
             Log.LogMessage("  GetInstanceInfo.Execute - complete at " + DateTime.Now.ToString());
             return retVal;
@@ -103,10 +124,6 @@ namespace BuildTasks.RightScaleAutomation
         protected override void ValidateInputs()
         {
             string errorMessage = string.Empty;
-            if (string.IsNullOrWhiteSpace(this.CloudID))
-            {
-                errorMessage += "CloudID is not defined and is required. ";
-            }
             if (string.IsNullOrWhiteSpace(this.ServerID))
             {
                 errorMessage += "ServerID is not defined and is required. ";
@@ -117,7 +134,7 @@ namespace BuildTasks.RightScaleAutomation
             }
             else
             {
-                Log.LogMessage(@"  GetInstanceInfo.ValidateInputs - inputs validated - CloudID (" + this.CloudID.ToString() + @"), ServerID (" + this.ServerID.ToString() + @")"); 
+                Log.LogMessage(@"  GetInstanceInfo.ValidateInputs - inputs validated - ServerID (" + this.ServerID.ToString() + @")"); 
             }
         }
     }

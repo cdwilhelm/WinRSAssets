@@ -3,20 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Build.Framework;
+using Microsoft.Build.Utilities;
 
 namespace BuildTasks.RightScaleAutomation
 {
     /// <summary>
     /// Custom build task takes a collection or a delimited string and polls the RightScale API on the indicated interval until the instance has reached the desired state
     /// </summary>
-    public class WaitForInstanceState : Base.RightScaleAPIBase
+    public class WaitForInstanceState : Base.RightScaleBuildTaskBase
     {
+
+        #region optional parameters
+
+        /// <summary>
+        /// private list of instances used to centralize the instances that are going to be
+        /// </summary>
         private List<string> listOfInstances;
 
         /// <summary>
         /// List of RightScale Instance ID's passed in as a list from MSBuild.  InstanceList or InstanceSet must be populated.
         /// </summary>
-        public IList<string> InstanceList { get; set; }
+        public ITaskItem[] InstanceList { get; set; }
 
         /// <summary>
         /// Delimited list of RightScale Instance ID's to query the RightScale API for its current state.  InstanceList or InstanceSet must be populated.
@@ -38,6 +46,8 @@ namespace BuildTasks.RightScaleAutomation
         /// </summary>
         public string DelimiterChar { get; set; }
 
+        #endregion
+
         /// <summary>
         /// Constructor sets default values for properties that are not required inputs
         /// </summary>
@@ -50,6 +60,9 @@ namespace BuildTasks.RightScaleAutomation
             this.InstanceSet = string.Empty;
         }
 
+        /// <summary>
+        /// Protected method validates that inputs are ok for execution
+        /// </summary>
         protected override void ValidateInputs()
         {
             throw new NotImplementedException();
@@ -70,7 +83,7 @@ namespace BuildTasks.RightScaleAutomation
 
             char splitDelim = Convert.ToChar(this.DelimiterChar);
 
-            if (this.InstanceList.Count < 1 && this.InstanceSet.Split(splitDelim).Count<string>() < 1)
+            if (this.InstanceList.Length < 1 && this.InstanceSet.Split(splitDelim).Count<string>() < 1)
             {
                 string errorMessage = "Errors found when parsing instance list: " + Environment.NewLine;
                 if (this.listOfInstances.Count < 1)
@@ -83,13 +96,13 @@ namespace BuildTasks.RightScaleAutomation
                 }
             }
 
-            if (this.InstanceList.Count > 0)
+            if (this.InstanceList.Length > 0)
             {
-                foreach (string s in this.InstanceList)
+                foreach (var item in this.InstanceList)
                 {
-                    if (!this.listOfInstances.Contains(s))
+                    if (!this.listOfInstances.Contains(item.ItemSpec))
                     {
-                        this.listOfInstances.Add(s);
+                        this.listOfInstances.Add(item.ItemSpec);
                     }
                 }
             }
