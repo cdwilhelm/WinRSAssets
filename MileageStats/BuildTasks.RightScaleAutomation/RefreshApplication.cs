@@ -126,35 +126,48 @@ namespace BuildTasks.RightScaleAutomation
         /// <returns>True if successful, false if not</returns>
         public override bool Execute()
         {
+            Log.LogMessage("RefreshApplication process starting");
+
             bool retVal = false;
             ValidateInputs();
 
             if (RightScale.netClient.Core.APIClient.Instance.Authenticate(this.OAuthRefreshToken).Result)
             {
-                RightScale.netClient.Server deployServer = RightScale.netClient.Server.show(this.ServerID);
+                Log.LogMessage("  RSAPI is authenticated");
 
+                RightScale.netClient.Server deployServer = RightScale.netClient.Server.show(this.ServerID);
+                
                 if (deployServer == null)
                 {
                     Log.LogError("deployServer object not found for server ID specified (" + this.ServerID + ").");
                 }
 
+                Log.LogMessage("  DeloyServer is populated");
+                    
                 List<KeyValuePair<string, string>> inputs = buildInputs();
+
+                Log.LogMessage("  Inputs for refresh process built");
+                
                 RightScale.netClient.Instance instance = deployServer.currentInstance;
                 if (instance != null)
                 {
-                    List<RightScale.netClient.Task> tasks = instance.multi_run_executable(instance.cloud.ID, true, inputs, this.RecipeName, this.RightScriptID);
-                    
-                    if (tasks.Count > 0)
+                    Log.LogMessage("    Beginning run_rightscript");
+                    RightScale.netClient.Instance curr_instance = RightScale.netClient.Server.show(this.ServerID).currentInstance;
+                    RightScale.netClient.Task task = RightScale.netClient.Instance.run_rightScript(curr_instance.cloud.ID, curr_instance.ID, this.RightScriptID, inputs);
+
+                    if (task != null)
                     {
                         retVal = true;
+                        Log.LogMessage("      multi_run_executable queued successfully");
                     }
+                    Log.LogMessage("    Complete multi_run_executable");
                 }
                 else
                 {
                     Log.LogError("There is no current instance to deploy to for server ID specified (" + this.ServerID + ").");
                 }
             }
-
+            Log.LogMessage("RefreshApplication Execute Complete");
             return retVal;
         }
     }

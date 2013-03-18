@@ -53,7 +53,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Targets\Build.ReleaseLog.xml" />
-    <Content Include="Targets\Build.RightScaleAutomation.xml" />
+    <Content Include="Targets\Build.RightScaleAutomation.xml">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Tasks\Build.AzureStorage\BuildTasks.AzureStorage.dll" />
     <Content Include="Tasks\Build.AzureStorage\BuildTasks.AzureStorage.pdb" />
     <Content Include="Tasks\Build.AzureStorage\Microsoft.Data.Edm.dll" />

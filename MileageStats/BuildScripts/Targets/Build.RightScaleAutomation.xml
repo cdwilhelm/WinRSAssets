@@ -5,15 +5,17 @@
 
   <UsingTask
     AssemblyFile="$(TasksRootFolder)Build.RightScaleAutomation\BuildTasks.RightScaleAutomation.dll"
-    TaskName="GetRSOAuthToken" />
-  <UsingTask
-    AssemblyFile="$(TasksRootFolder)Build.RightScaleAutomation\BuildTasks.RightScaleAutomation.dll"
     TaskName="LaunchRSServer" />
+
   <UsingTask
     AssemblyFile="$(TasksRootFolder)Build.RightScaleAutomation\BuildTasks.RightScaleAutomation.dll"
     TaskName="RefreshApplication" />
 
-  <Target Name="LaunchDevTestServer">
+  <UsingTask
+    AssemblyFile="$(TasksRootFolder)Build.RightScaleAutomation\BuildTasks.RightScaleAutomation.dll"
+    TaskName="TerminateWithWait"/>
+
+  <Target Name="LaunchDevTestServer" DependsOnTargets="TerminateWithWait">
 
     <LaunchRSServer OAuthRefreshToken="$(RSAPIOAuth2RefreshToken)"
                     ServerID="$(RSDevTestServerID)"
@@ -35,6 +37,11 @@
                     ROSProviderName="Windows_Azure_Storage"
                     RightScriptID="$(RedeployRightScriptID)"/>
     
+  </Target>
+  
+  <Target Name="TerminateWithWait">
+    <TerminateWithWait OAuthRefreshToken="$(RSAPIOAuth2RefreshToken)"
+                   ServerID ="$(RSDevTestServerID)"/>
   </Target>
 
 </Project>

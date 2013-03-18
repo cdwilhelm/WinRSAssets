@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
   <metadata>
     <id>RightScale.netClient</id>
-    <version>0.1.1-alpha</version>
+    <version>0.1.2-alpha</version>
     <title>RightScale .net API Client</title>
     <authors>Patrick McClory</authors>
     <owners>Patrick McClory</owners>
@@ -10,7 +10,9 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>My package description.</description>
     <summary>Object model and client for RightScale API 1.5.  For more information on the API check out the RightScale Support site: http://support.rightscale.com/12-Guides/RightScale_API_1.5</summary>
-    <releaseNotes>v0.1.1: incremental fixes and major bug in object relationships fixed
+    <releaseNotes>v0.1.2: major fixes to input processing
+
+v0.1.1: incremental fixes and major bug in object relationships fixed
 
 v0.1.0: Alpha release of RightScale.netClient - this is not a fully fleshed out version, but the Server, Instance and Deployment objects are testing well and seem to be fully functional along with the underlying authentication mechanisms.  This release is partially documented by the 0.1.0 milestone in Github (https://github.com/patrickmcclory/RightScaleNetAPI/issues?milestone=1&amp;state=closed) though we started tracking tasks after the bulk of the core and object model were stubbed out.</releaseNotes>
     <copyright />

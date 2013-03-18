@@ -96,22 +96,28 @@ namespace BuildTasks.RightScaleAutomation
             bool retVal = false;
             Log.LogMessage("  GetInstanceInfo.Execute - beginning at " + DateTime.Now.ToString());
             ValidateInputs();
-
-            RightScale.netClient.Server server = RightScale.netClient.Server.show(this.ServerID, "instance_detail");
-
-            if (server.current_instance != null)
+            if (RightScale.netClient.Core.APIClient.Instance.Authenticate(this.OAuthRefreshToken).Result)
             {
-                RightScale.netClient.Instance currentInstance = server.current_instance;
-                this.PrivateIPAddresses = currentInstance.private_ip_addresses;
-                this.PublicIPAddresses = currentInstance.public_ip_addresses;
-                this.CreatedAt = currentInstance.created_at;
-                this.UpdatedAt = currentInstance.updated_at;
-                this.Name = currentInstance.name;
-                this.ResourceUid = currentInstance.resource_uid;
-                this.State = currentInstance.state;
-                this.OSPlatform = currentInstance.os_platform;
-                this.PrivateDNSNames = currentInstance.private_dns_names;
-                this.InstanceID = currentInstance.ID;
+                RightScale.netClient.Server server = RightScale.netClient.Server.show(this.ServerID, "instance_detail");
+
+                if (server.current_instance != null)
+                {
+                    RightScale.netClient.Instance currentInstance = server.current_instance;
+                    this.PrivateIPAddresses = currentInstance.private_ip_addresses;
+                    this.PublicIPAddresses = currentInstance.public_ip_addresses;
+                    this.CreatedAt = currentInstance.created_at;
+                    this.UpdatedAt = currentInstance.updated_at;
+                    this.Name = currentInstance.name;
+                    this.ResourceUid = currentInstance.resource_uid;
+                    this.State = currentInstance.state;
+                    this.OSPlatform = currentInstance.os_platform;
+                    this.PrivateDNSNames = currentInstance.private_dns_names;
+                    this.InstanceID = currentInstance.ID;
+                }
+            }
+            else
+            {
+                Log.LogMessage("  Cannot authenticate to RSAPI");
             }
 
             Log.LogMessage("  GetInstanceInfo.Execute - complete at " + DateTime.Now.ToString());
