@@ -55,7 +55,7 @@ namespace BuildTasks.RightScaleAutomation
                     Log.LogMessage("  Cannot terminate because machine is already not running");
                     return true;
                 }
-                else if (currentState == "terminating")
+                else if (currentState == "decommissioning")
                 {
                     Log.LogMessage("  Machine is already terminating, waiting to confirm");
                 }
@@ -69,7 +69,7 @@ namespace BuildTasks.RightScaleAutomation
                 int cycleID = 0;
                 Log.LogMessage("  Cycle " + cycleID.ToString() + " completed.  Current state of the server is " + currentState);
 
-                if (currentState != "inactive" && this.MaxWaitCycles != -1 && cycleID > this.MaxWaitCycles)
+                while (currentState != "inactive" && (cycleID < this.MaxWaitCycles || this.MaxWaitCycles == -1))
                 {
                     Thread.Sleep(WaitCycleTime * 1000);
                     currentState = Server.show(this.ServerID).state;
