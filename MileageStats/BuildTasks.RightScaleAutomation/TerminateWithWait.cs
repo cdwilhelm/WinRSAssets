@@ -69,7 +69,7 @@ namespace BuildTasks.RightScaleAutomation
                 int cycleID = 0;
                 Log.LogMessage("  Cycle " + cycleID.ToString() + " completed.  Current state of the server is " + currentState);
 
-                if (currentState != "inactive" && (this.MaxWaitCycles > 0 && (cycleID > this.MaxWaitCycles)))
+                if (currentState != "inactive" && this.MaxWaitCycles != -1 && cycleID > this.MaxWaitCycles)
                 {
                     Thread.Sleep(WaitCycleTime * 1000);
                     currentState = Server.show(this.ServerID).state;
