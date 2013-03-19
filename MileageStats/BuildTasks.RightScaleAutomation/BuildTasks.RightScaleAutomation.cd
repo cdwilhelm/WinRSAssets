@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="BuildTasks.RightScaleAutomation.LaunchRSServer">
+    <Position X="4" Y="0.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AACAACAAQBAAQAQAAAAAAgBAAAgAAAAAECQAAABAAAA=</HashCode>
+      <FileName>LaunchRSServer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildTasks.RightScaleAutomation.RefreshApplication">
+    <Position X="6.75" Y="0.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AACAACAAQAAAAAQAAAAAAgBAAAgAAAAAEAAAAABAAEA=</HashCode>
+      <FileName>RefreshApplication.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BuildTasks.RightScaleAutomation.TerminateWithWait">
+    <Position X="1.25" Y="0.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAIAAAAAAAAAARAAAAAAAAAAAAAAAAAAAAAAABAAAA=</HashCode>
+      <FileName>TerminateWithWait.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
