@@ -27,7 +27,7 @@
     <MSBuild Projects="@(SolutionsToBuild)"
              Properties="DeployOnBuild=true;
                        DeployTarget=Package;
-                       PackageLocation=$(PackageLocation)\working;"/>
+                       PackageLocation=$(PackageLocation)\working\MileageStats.Web.zip;"/>
 
     <MakeDir Directories="$(PackageLocation)/$(BuildID)"/>
     <Delete Files="$(PackageLocation)/$(BuildID)/$(BuildID).zip"/>
